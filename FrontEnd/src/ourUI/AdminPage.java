@@ -10,6 +10,9 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.factories.FormFactory;
 import javax.swing.JLabel;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class AdminPage {
 
@@ -18,6 +21,7 @@ public class AdminPage {
 	private JTextField txtPassword;
 	private JLabel lblAccount;
 	private JLabel lblPassword;
+	private JButton btnNewButton;
 
 	/**
 	 * Launch the application.
@@ -49,42 +53,33 @@ public class AdminPage {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(new FormLayout(new ColumnSpec[] {
-				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("default:grow"),},
-			new RowSpec[] {
-				FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,}));
+		frame.getContentPane().setLayout(null);
 		
 		lblAccount = new JLabel("Account");
-		frame.getContentPane().add(lblAccount, "8, 6");
+		lblAccount.setBounds(72, 64, 117, 16);
+		frame.getContentPane().add(lblAccount);
 		
 		txtAccount = new JTextField();
-		frame.getContentPane().add(txtAccount, "10, 6, fill, default");
+		txtAccount.setBounds(136, 58, 227, 28);
+		frame.getContentPane().add(txtAccount);
 		txtAccount.setColumns(10);
 		
 		lblPassword = new JLabel("Password");
-		frame.getContentPane().add(lblPassword, "8, 10, right, default");
+		lblPassword.setBounds(72, 124, 117, 16);
+		frame.getContentPane().add(lblPassword);
 		
 		txtPassword = new JTextField();
-		frame.getContentPane().add(txtPassword, "10, 10, fill, default");
+		txtPassword.setBounds(136, 118, 227, 28);
+		frame.getContentPane().add(txtPassword);
 		txtPassword.setColumns(10);
+		
+		btnNewButton = new JButton("Log In");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton.setBounds(163, 208, 117, 29);
+		frame.getContentPane().add(btnNewButton);
 	}
 
 }
