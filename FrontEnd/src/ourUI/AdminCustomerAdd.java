@@ -1,6 +1,8 @@
 package ourUI;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -9,7 +11,7 @@ import javax.swing.JButton;
 
 public class AdminCustomerAdd {
 
-	private JFrame frame;
+	JFrame frame;
 	private JTextField textField;
 	private JTextField AdminAddCustomerfName;
 	private JTextField AdminAddCustomerlName;
@@ -97,6 +99,13 @@ public class AdminCustomerAdd {
 		
 		JButton btnAddClient = new JButton("Add Customer");
 		btnAddClient.setBounds(568, 363, 117, 29);
+		btnAddClient.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new AdminRoomControl().frame.setVisible(true);
+				// Change later to visible
+				frame.dispose();
+			}
+		});
 		frame.getContentPane().add(btnAddClient);
 		
 		JLabel lblCustomerId = new JLabel("Customer ID");
@@ -110,6 +119,7 @@ public class AdminCustomerAdd {
 		
 		JButton btnGenerate = new JButton("Generate");
 		btnGenerate.setBounds(581, 47, 87, 23);
+
 		frame.getContentPane().add(btnGenerate);
 		
 		JLabel lblAddress = new JLabel("Address");

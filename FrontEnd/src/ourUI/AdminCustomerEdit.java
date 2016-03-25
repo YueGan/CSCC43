@@ -1,6 +1,8 @@
 package ourUI;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -115,6 +117,13 @@ public class AdminCustomerEdit {
 		
 		JButton btnUpdate = new JButton("Update");
 		btnUpdate.setBounds(567, 362, 117, 29);
+		btnUpdate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new AdminRoomControl().frame.setVisible(true);
+				// Change later to visible
+				frame.dispose();
+			}
+		});
 		frame.getContentPane().add(btnUpdate);
 	}
 

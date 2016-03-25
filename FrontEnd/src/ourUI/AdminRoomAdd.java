@@ -9,12 +9,12 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
-public class RoomReservationPage {
+public class AdminRoomAdd {
 
 	JFrame frame;
 	private JTextField textField;
 	private JTextField textField_1;
-	private JTextField textField_2;
+	private JButton btnAddRoom;
 
 	/**
 	 * Launch the application.
@@ -23,7 +23,7 @@ public class RoomReservationPage {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					RoomReservationPage window = new RoomReservationPage();
+					AdminRoomAdd window = new AdminRoomAdd();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -35,7 +35,7 @@ public class RoomReservationPage {
 	/**
 	 * Create the application.
 	 */
-	public RoomReservationPage() {
+	public AdminRoomAdd() {
 		initialize();
 	}
 
@@ -48,51 +48,34 @@ public class RoomReservationPage {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
+		JLabel lblRoomNumer = new JLabel("Room Numer");
+		lblRoomNumer.setBounds(26, 28, 200, 50);
+		frame.getContentPane().add(lblRoomNumer);
+		
 		JLabel lblCapacity = new JLabel("Capacity");
-		lblCapacity.setBounds(25, 16, 61, 25);
+		lblCapacity.setBounds(26, 105, 200, 50);
 		frame.getContentPane().add(lblCapacity);
 		
-		JLabel label = new JLabel("Check in");
-		label.setBounds(176, 16, 61, 25);
-		frame.getContentPane().add(label);
-		
-		JLabel label_1 = new JLabel("Check out");
-		label_1.setBounds(313, 16, 102, 25);
-		frame.getContentPane().add(label_1);
-		
 		textField = new JTextField();
-		textField.setBounds(25, 42, 68, 28);
+		textField.setBounds(232, 28, 200, 50);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
 		
 		textField_1 = new JTextField();
-		textField_1.setBounds(157, 42, 134, 28);
-		frame.getContentPane().add(textField_1);
 		textField_1.setColumns(10);
+		textField_1.setBounds(232, 105, 200, 50);
+		frame.getContentPane().add(textField_1);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(310, 42, 134, 28);
-		frame.getContentPane().add(textField_2);
-		textField_2.setColumns(10);
-		
-		JLabel lblDisplayOptionHere = new JLabel("Display Option Here");
-		lblDisplayOptionHere.setBounds(25, 92, 200, 50);
-		frame.getContentPane().add(lblDisplayOptionHere);
-		
-		JButton btnGenerate = new JButton("Generate");
-		btnGenerate.setBounds(284, 82, 117, 29);
-		frame.getContentPane().add(btnGenerate);
-		
-		JButton btnNext = new JButton("Next");
-		btnNext.setBounds(241, 158, 117, 29);
-		btnNext.addActionListener(new ActionListener() {
+		btnAddRoom = new JButton("Add Room");
+		btnAddRoom.setBounds(291, 219, 117, 29);
+		btnAddRoom.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new CustomerReservation().frame.setVisible(true);
+				new AdminRoomControl().frame.setVisible(true);
 				// Change later to visible
 				frame.dispose();
 			}
 		});
-		frame.getContentPane().add(btnNext);
+		frame.getContentPane().add(btnAddRoom);
 	}
 
 }

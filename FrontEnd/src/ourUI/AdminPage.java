@@ -16,12 +16,16 @@ import java.awt.event.ActionEvent;
 
 public class AdminPage {
 
-	private JFrame frame;
+	JFrame frame;
 	private JTextField txtAccount;
 	private JTextField txtPassword;
 	private JLabel lblAccount;
 	private JLabel lblPassword;
 	private JButton btnNewButton;
+	
+	private final String username = "admin";
+	private final String password = "password";
+	private JLabel lblWrongAccountpassword;
 
 	/**
 	 * Launch the application.
@@ -64,6 +68,7 @@ public class AdminPage {
 		frame.getContentPane().add(txtAccount);
 		txtAccount.setColumns(10);
 		
+		
 		lblPassword = new JLabel("Password");
 		lblPassword.setBounds(72, 124, 117, 16);
 		frame.getContentPane().add(lblPassword);
@@ -73,13 +78,32 @@ public class AdminPage {
 		frame.getContentPane().add(txtPassword);
 		txtPassword.setColumns(10);
 		
+		lblWrongAccountpassword = new JLabel("Wrong Account/Password");
+		lblWrongAccountpassword.setBounds(122, 152, 200, 50);
+		frame.getContentPane().add(lblWrongAccountpassword);
+		lblWrongAccountpassword.setVisible(false);
+		
 		btnNewButton = new JButton("Log In");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// Get the input of account
+				String tempAcc = txtAccount.getText();
+				String tempPswd = txtPassword.getText();
+				
+				if(tempAcc.equals(username) && tempPswd.equals(password)){
+				
+					new AdminControl().frame.setVisible(true);
+					frame.dispose();
+				}
+				else{
+					lblWrongAccountpassword.setVisible(true);
+					//System.out.println("woeidhslidhilfd");
+				}
 			}
 		});
 		btnNewButton.setBounds(163, 208, 117, 29);
 		frame.getContentPane().add(btnNewButton);
-	}
+		
 
+	}
 }

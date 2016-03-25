@@ -1,13 +1,15 @@
 package ourUI;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
 
 public class AdminRoomControl {
 
-	private JFrame frame;
+	JFrame frame;
 
 	/**
 	 * Launch the application.
@@ -43,18 +45,46 @@ public class AdminRoomControl {
 		
 		JButton btnNewButton = new JButton("Add Room");
 		btnNewButton.setBounds(65, 23, 328, 29);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new AdminRoomAdd().frame.setVisible(true);
+				// Change later to visible
+				frame.dispose();
+			}
+		});
 		frame.getContentPane().add(btnNewButton);
 		
 		JButton btnEditRoomInformation = new JButton("Edit Room Information");
 		btnEditRoomInformation.setBounds(65, 51, 328, 29);
+		btnEditRoomInformation.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new AdminRoomEdit().frame.setVisible(true);
+				// Change later to visible
+				frame.dispose();
+			}
+		});
 		frame.getContentPane().add(btnEditRoomInformation);
 		
 		JButton btnAddCustomer = new JButton("Add Customer");
 		btnAddCustomer.setBounds(65, 87, 328, 29);
+		btnAddCustomer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new AdminCustomerAdd().frame.setVisible(true);
+				// Change later to visible
+				frame.dispose();
+			}
+		});
 		frame.getContentPane().add(btnAddCustomer);
 		
 		JButton btnEditUser = new JButton("Edit User");
 		btnEditUser.setBounds(65, 128, 328, 29);
+		btnEditUser.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new AdminRoomEdit().frame.setVisible(true);
+				// Change later to visible
+				frame.dispose();
+			}
+		});
 		frame.getContentPane().add(btnEditUser);
 	}
 
