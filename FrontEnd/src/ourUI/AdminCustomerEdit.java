@@ -44,7 +44,7 @@ public class AdminCustomerEdit {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 710, 440);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -114,7 +114,7 @@ public class AdminCustomerEdit {
 		frame.getContentPane().add(textField_4);
 		
 		JButton btnUpdate = new JButton("Update");
-		btnUpdate.setBounds(296, 232, 117, 29);
+		btnUpdate.setBounds(567, 362, 117, 29);
 		frame.getContentPane().add(btnUpdate);
 	}
 

@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+import javax.swing.JLabel;
 
 public class AdminControl {
 
@@ -49,15 +50,19 @@ public class AdminControl {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnAdministrator.setBounds(54, 22, 331, 29);
+		btnAdministrator.setBounds(54, 72, 331, 29);
 		frame.getContentPane().add(btnAdministrator);
 		
 		JButton btnCustomerControl = new JButton("Customer Control");
-		btnCustomerControl.setBounds(54, 63, 331, 29);
+		btnCustomerControl.setBounds(54, 111, 331, 29);
 		frame.getContentPane().add(btnCustomerControl);
 		
 		JButton btnMakeReservation = new JButton("Make Reservation");
-		btnMakeReservation.setBounds(54, 104, 331, 29);
+		btnMakeReservation.setBounds(54, 185, 331, 29);
 		frame.getContentPane().add(btnMakeReservation);
+		
+		JLabel lblAdminContralPannel = new JLabel("Admin Contral Pannel");
+		lblAdminContralPannel.setBounds(161, 10, 111, 28);
+		frame.getContentPane().add(lblAdminContralPannel);
 	}
 }
