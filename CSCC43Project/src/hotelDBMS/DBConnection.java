@@ -1,6 +1,9 @@
 package hotelDBMS;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Set;
 
 public class DBConnection {
 	
@@ -23,25 +26,35 @@ public class DBConnection {
 			// get result table set
 			ResultSet myRs = myStmt.executeQuery(query);
 			// print out the table 
-			while(myRs.next()){
-				// fill in column name
-				System.out.println(myRs.getString("fName"));
-			}
+//			System.out.println(myRs.getString("customerRef"));
+//			while(myRs.next()){
+//				// fill in column name
+//				System.out.println(myRs.getString("customerRef"));
+//			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}	
 	
-	public void addCustomer(Integer refNumber, String fName, String lName, String IDnumber, String emailAddress, String country){
+	public void addCustomer(String fName, String lName, String IDnumber, String emailAddress, String country){
 		try {
 			// create new Statement
+			Integer newCustomerRef;
 			Statement myStmt = conn.createStatement();
+			ArrayList<Integer> customerRefList = new ArrayList<Integer>();
+			ResultSet customerAddressSet = myStmt.executeQuery("SELECT custo"
+					+ "merRef FROM firstschema.customers"
+					+ "");
+			while(customerAddressSet.next()){
+				customerRefList.add(Integer.parseInt(customerAddressSet.getString("customerRef")));
+			}
+			newCustomerRef = Collections.max(customerRefList) + 1;
 			// the entity with need to be added
-			String entity = refNumber + ",'" + fName + "','" + lName + "','" + IDnumber + "','" + emailAddress + "','" + country +"'";
+			String entity = newCustomerRef + ",'" + fName + "','" + lName + "','" + IDnumber + "','" + emailAddress + "','" + country +"'";
 			// the query for inserting
 			String query = "INSERT INTO customers"
-					+ "(refNumber, fName, lName, IDnumber, emailAddress, country)"
+					+ "(customerRef, fName, lName, IDnumber, emailAddress, country)"
 					+ "VALUES(" + entity + ")"; 
 			// 
 			myStmt.executeUpdate(query);
@@ -156,12 +169,13 @@ public class DBConnection {
 //			   e.printStackTrace(); 
 //			  }
 		DBConnection myDB = new DBConnection("jdbc:mysql://localhost:3306/firstSchema", "root", "260225towncenter");
-//		myDB.executeQuery("SELECT * FROM firstschema.customers;");
-		//myDB.addCustomer(9,"FIRST","LAST","1234","hellogmail.com","ca");
+		//
+		myDB.executeQuery("SELECT * FROM firstSchema.customers;");
+		myDB.addCustomer("FIRST","LAST","1234","hellogmail.com","ca");
 		//myDB.addRooms(234,"window",3, 899.99, 99);
 //		myDB.updateCustomer("customerRef","888","customerRef", "B3");
 //		myDB.executeQuery("SELECT * FROM firstschema.customers;");
-		myDB.addInvoice(22334,"98999",334.44,"true", "visa","");
+//		myDB.addInvoice(22334,"98999",334.44,"true", "visa","");
 		//myDB.updateCustomer("invoiceNumber","888","customerRef", "B3");
 	}
 }
