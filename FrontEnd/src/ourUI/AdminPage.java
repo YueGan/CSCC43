@@ -4,13 +4,17 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JTextField;
+
 import java.awt.BorderLayout;
+
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.factories.FormFactory;
+
 import javax.swing.JLabel;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -92,12 +96,13 @@ public class AdminPage {
 				
 				if(tempAcc.equals(username) && tempPswd.equals(password)){
 				
-					new AdminControl().frame.setVisible(true);
+					AdminControl newAdmin = new AdminControl();
+					newAdmin.getConnection(new DBConnection("jdbc:mysql://localhost:3306/firstSchema", "root", "260225towncenter"));
+					newAdmin.frame.setVisible(true);
 					frame.dispose();
 				}
 				else{
 					lblWrongAccountpassword.setVisible(true);
-					//System.out.println("woeidhslidhilfd");
 				}
 			}
 		});

@@ -15,6 +15,7 @@ public class AdminRoomAdd {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JButton btnAddRoom;
+	private JTextField textField_2;
 
 	/**
 	 * Launch the application.
@@ -66,16 +67,27 @@ public class AdminRoomAdd {
 		textField_1.setBounds(232, 105, 200, 50);
 		frame.getContentPane().add(textField_1);
 		
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		textField_2.setBounds(232, 167, 200, 50);
+		frame.getContentPane().add(textField_2);
+		
 		btnAddRoom = new JButton("Add Room");
-		btnAddRoom.setBounds(291, 219, 117, 29);
+		btnAddRoom.setBounds(295, 229, 117, 29);
 		btnAddRoom.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				new AdminRoomControl().frame.setVisible(true);
 				// Change later to visible
 				frame.dispose();
 			}
 		});
 		frame.getContentPane().add(btnAddRoom);
-	}
+		
+		JLabel lblRoomType = new JLabel("Room Type");
+		lblRoomType.setBounds(26, 188, 82, 16);
+		frame.getContentPane().add(lblRoomType);
+		
 
+	}
 }

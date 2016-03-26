@@ -56,6 +56,8 @@ public class ChooseUser {
 		btnAdministrator.setBounds(142, 129, 117, 29);
 		btnAdministrator.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// Load Admin database and pass the parameter to next page
+				// todo.
 				new AdminPage().frame.setVisible(true);
 				// Change later to visible
 				frame.dispose();
@@ -67,7 +69,12 @@ public class ChooseUser {
 		btnCustomer.setBounds(286, 129, 117, 29);
 		btnCustomer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new RoomReservationPage().frame.setVisible(true);
+				// Load Admin database and pass the parameter to next page
+				// todo.
+				RoomReservationPage customer = new RoomReservationPage();
+				customer.frame.setVisible(true);
+				customer.getConnection(new DBConnection("jdbc:mysql://localhost:3306/firstSchema",
+						"root", "260225towncenter"));
 				// Change later to visible
 				frame.dispose();
 			}

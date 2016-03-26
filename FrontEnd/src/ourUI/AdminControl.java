@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 public class AdminControl {
 
 	JFrame frame;
-
+	private DBConnection adminConnect;
 	/**
 	 * Launch the application.
 	 */
@@ -37,7 +37,10 @@ public class AdminControl {
 	public AdminControl() {
 		initialize();
 	}
-
+	
+	public void getConnection(DBConnection givenConnect){
+		adminConnect = givenConnect;
+	}
 	/**
 	 * Initialize the contents of the frame.
 	 */

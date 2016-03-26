@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
@@ -19,6 +20,9 @@ public class AdminCustomerAdd {
 	private JTextField AdminAddCustomerEmail;
 	private JTextField AdminAddCustomerCountry;
 	private JTextField AdminAddCustomerCID;
+	
+	private String firstName, lastName, idNumber, email, country;
+	private DBConnection adminConnect;
 
 	/**
 	 * Launch the application.
@@ -43,6 +47,9 @@ public class AdminCustomerAdd {
 		initialize();
 	}
 
+	public void getConnection(DBConnection givenConnect){
+		adminConnect = givenConnect;
+	}
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -101,15 +108,33 @@ public class AdminCustomerAdd {
 		btnAddClient.setBounds(568, 363, 117, 29);
 		btnAddClient.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new AdminRoomControl().frame.setVisible(true);
-				// Change later to visible
-				frame.dispose();
+				
+				
+				// Here are all the user information inputed
+				firstName = AdminAddCustomerfName.getText();
+				lastName = AdminAddCustomerlName.getText();
+				idNumber = AdminAddCustomerIDnumber.getText();
+				email = AdminAddCustomerEmail.getText();
+				country = AdminAddCustomerCountry.getText();
+				
+				try{
+					adminConnect.addCustomer(firstName, lastName, idNumber, email, country);
+					new AdminRoomControl().frame.setVisible(true);
+					// Change later to visible
+					frame.dispose();
+				}
+				catch (Exception er){
+					JOptionPane.showMessageDialog(null,"Please enter all fields");
+					
+				}
+				
+				
 			}
 		});
 		frame.getContentPane().add(btnAddClient);
 		
 		JLabel lblCustomerId = new JLabel("Customer ID");
-		lblCustomerId.setBounds(340, 5, 76, 29);
+		lblCustomerId.setBounds(340, 5, 161, 29);
 		frame.getContentPane().add(lblCustomerId);
 		
 		AdminAddCustomerCID = new JTextField();
@@ -127,4 +152,6 @@ public class AdminCustomerAdd {
 		frame.getContentPane().add(lblAddress);
 		
 	}
+	
+
 }

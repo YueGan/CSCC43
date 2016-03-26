@@ -15,7 +15,8 @@ public class RoomReservationPage {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
-
+	private DBConnection userConnect;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -38,7 +39,9 @@ public class RoomReservationPage {
 	public RoomReservationPage() {
 		initialize();
 	}
-
+	public void getConnection(DBConnection givenConnect){
+		userConnect = givenConnect;
+	}
 	/**
 	 * Initialize the contents of the frame.
 	 */

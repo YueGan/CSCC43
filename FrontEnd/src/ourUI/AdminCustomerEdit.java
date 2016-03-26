@@ -3,21 +3,27 @@ package ourUI;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
 public class AdminCustomerEdit {
 
 	private JFrame frame;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-
+	private JTextField txtFirstName;
+	private JTextField txtLastName;
+	private JTextField txtCustomerID;
+	private JTextField txtEmail;
+	private JTextField txtCountry;
+	private DBConnection adminConnect;
+	private String customerRef;
+	private JTextField txtCustomerRef;
+	private ResultSet result = null;
 	/**
 	 * Launch the application.
 	 */
@@ -41,6 +47,11 @@ public class AdminCustomerEdit {
 		initialize();
 	}
 
+	public void getConnection(DBConnection givenConnect){
+		adminConnect = givenConnect;
+	}
+
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -50,81 +61,104 @@ public class AdminCustomerEdit {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
+		
 		JLabel lblName = new JLabel("First Name");
-		lblName.setBounds(29, 6, 75, 29);
+		lblName.setBounds(29, 39, 75, 29);
 		frame.getContentPane().add(lblName);
 		
 		JLabel label = new JLabel("Last Name");
-		label.setBounds(29, 47, 75, 29);
+		label.setBounds(29, 80, 75, 29);
 		frame.getContentPane().add(label);
 		
 		JLabel label_1 = new JLabel("ID Number");
-		label_1.setBounds(29, 100, 75, 29);
+		label_1.setBounds(29, 133, 75, 29);
 		frame.getContentPane().add(label_1);
 		
 		JLabel label_2 = new JLabel("Email");
-		label_2.setBounds(29, 141, 75, 29);
+		label_2.setBounds(29, 174, 75, 29);
 		frame.getContentPane().add(label_2);
 		
 		JLabel label_3 = new JLabel("Country");
-		label_3.setBounds(29, 192, 75, 29);
+		label_3.setBounds(29, 225, 75, 29);
 		frame.getContentPane().add(label_3);
 		
-		JLabel label_4 = new JLabel("Display First Name");
-		label_4.setBounds(142, 6, 132, 29);
-		frame.getContentPane().add(label_4);
+		txtFirstName = new JTextField();
+		txtFirstName.setBounds(286, 39, 134, 28);
+		frame.getContentPane().add(txtFirstName);
+		txtFirstName.setColumns(10);
 		
-		JLabel label_5 = new JLabel("Display Last Name");
-		label_5.setBounds(142, 47, 132, 29);
-		frame.getContentPane().add(label_5);
+		txtLastName = new JTextField();
+		txtLastName.setColumns(10);
+		txtLastName.setBounds(286, 80, 134, 28);
+		frame.getContentPane().add(txtLastName);
 		
-		JLabel label_6 = new JLabel("Display ID Number");
-		label_6.setBounds(142, 100, 132, 29);
-		frame.getContentPane().add(label_6);
+		txtCustomerID = new JTextField();
+		txtCustomerID.setColumns(10);
+		txtCustomerID.setBounds(286, 133, 134, 28);
+		frame.getContentPane().add(txtCustomerID);
 		
-		JLabel label_7 = new JLabel("Display Email");
-		label_7.setBounds(142, 141, 132, 29);
-		frame.getContentPane().add(label_7);
+		txtEmail = new JTextField();
+		txtEmail.setColumns(10);
+		txtEmail.setBounds(286, 174, 134, 28);
+		frame.getContentPane().add(txtEmail);
 		
-		JLabel label_8 = new JLabel("Display Country");
-		label_8.setBounds(142, 192, 132, 29);
-		frame.getContentPane().add(label_8);
+		txtCountry = new JTextField();
+		txtCountry.setColumns(10);
+		txtCountry.setBounds(286, 225, 134, 28);
+		frame.getContentPane().add(txtCountry);
 		
-		textField = new JTextField();
-		textField.setBounds(286, 6, 134, 28);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
-		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(286, 47, 134, 28);
-		frame.getContentPane().add(textField_1);
-		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(286, 100, 134, 28);
-		frame.getContentPane().add(textField_2);
-		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(286, 141, 134, 28);
-		frame.getContentPane().add(textField_3);
-		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(286, 192, 134, 28);
-		frame.getContentPane().add(textField_4);
-		
+
 		JButton btnUpdate = new JButton("Update");
 		btnUpdate.setBounds(567, 362, 117, 29);
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new AdminRoomControl().frame.setVisible(true);
-				// Change later to visible
-				frame.dispose();
+				
+				if(customerRef.equals("")){
+					JOptionPane.showMessageDialog(null,"Please generate a customer first!");
+				}
+				else{
+					adminConnect.updateMethod("customer", "fName", txtFirstName.getText(), "customerRef", customerRef);
+					adminConnect.updateMethod("customer", "lName", txtLastName.getText(), "customerRef", customerRef);
+					adminConnect.updateMethod("customer", "customerID", txtCustomerID.getText(), "customerRef", customerRef);
+					adminConnect.updateMethod("customer", "email", txtEmail.getText(), "customerRef", customerRef);
+					adminConnect.updateMethod("customer", "country", txtCountry.getText(), "customerRef", customerRef);
+					new AdminRoomControl().frame.setVisible(true);
+					// Change later to visible
+					frame.dispose();
+				}
 			}
 		});
 		frame.getContentPane().add(btnUpdate);
+		
+		JLabel lblCustomerReferenceNumber = new JLabel("Customer Reference Number");
+		lblCustomerReferenceNumber.setBounds(29, 11, 188, 16);
+		frame.getContentPane().add(lblCustomerReferenceNumber);
+		
+		txtCustomerRef = new JTextField();
+		txtCustomerRef.setBounds(286, 5, 134, 28);
+		frame.getContentPane().add(txtCustomerRef);
+		txtCustomerRef.setColumns(10);
+		
+		JButton btnGenerate = new JButton("Generate");
+		btnGenerate.setBounds(457, 6, 117, 29);
+		btnGenerate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				// Later, add try to catch if cusRef does not exist
+				result = adminConnect.getCustomer(txtCustomerRef.getText());
+				try{
+					txtFirstName.setText(result.getString("fName"));
+					txtLastName.setText(result.getString("lName"));
+					txtCustomerID.setText(result.getString("IDnumber"));
+					txtEmail.setText(result.getString("emailAddress"));
+					txtCountry.setText(result.getString("country"));
+					
+				} catch (SQLException ef) {
+					// TODO Auto-generated catch block
+					ef.printStackTrace();
+				}
+			}
+		});
+		frame.getContentPane().add(btnGenerate);
 	}
-
 }
