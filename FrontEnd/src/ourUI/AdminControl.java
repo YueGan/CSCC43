@@ -22,8 +22,8 @@ public class AdminControl {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AdminControl window = new AdminControl();
-					window.frame.setVisible(true);
+					//AdminControl window = new AdminControl(new DBConnection("jdbc:mysql://sql5.freemysqlhosting.net:3306/sql5112390", "sql5112390", "GRa9gFy4NQ"));
+					//window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -34,13 +34,11 @@ public class AdminControl {
 	/**
 	 * Create the application.
 	 */
-	public AdminControl() {
+	public AdminControl(DBConnection adminConnect) {
+		this.adminConnect = adminConnect;
 		initialize();
 	}
 	
-	public void getConnection(DBConnection givenConnect){
-		adminConnect = givenConnect;
-	}
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -53,7 +51,8 @@ public class AdminControl {
 		JButton btnAdministrator = new JButton("Room/Customer Control");
 		btnAdministrator.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new AdminRoomControl().frame.setVisible(true);
+				new AdminRoomControl(adminConnect).frame.setVisible(true);
+
 				// Change later to visible
 				frame.dispose();
 			}
@@ -65,7 +64,7 @@ public class AdminControl {
 		btnReservationsControl.setBounds(54, 111, 331, 29);
 		btnReservationsControl.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new ReservationsControl().frame.setVisible(true);
+				new ReservationsControl(adminConnect).frame.setVisible(true);
 				// Change later to visible
 				frame.dispose();
 			}
@@ -76,7 +75,7 @@ public class AdminControl {
 		btnMakeReservation.setBounds(54, 185, 331, 29);
 		btnMakeReservation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new RoomReservationPage().frame.setVisible(true);
+				new RoomReservationPage(adminConnect).frame.setVisible(true);
 				// Change later to visible
 				frame.dispose();
 			}

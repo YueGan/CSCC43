@@ -12,10 +12,12 @@ import javax.swing.JButton;
 public class AdminRoomAdd {
 
 	JFrame frame;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField txtRoomNumber;
+	private JTextField txtCapacity;
 	private JButton btnAddRoom;
-	private JTextField textField_2;
+	private JTextField txtRoomType;
+	private DBConnection adminConnect;
+	private JTextField txtPrice;
 
 	/**
 	 * Launch the application.
@@ -24,8 +26,7 @@ public class AdminRoomAdd {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AdminRoomAdd window = new AdminRoomAdd();
-					window.frame.setVisible(true);
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -36,10 +37,13 @@ public class AdminRoomAdd {
 	/**
 	 * Create the application.
 	 */
-	public AdminRoomAdd() {
+	public AdminRoomAdd(DBConnection adminConnect) {
+		this.adminConnect = adminConnect;
 		initialize();
 	}
-
+	public void getConnection(DBConnection givenConnect){
+		adminConnect = givenConnect;
+	}
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -50,43 +54,61 @@ public class AdminRoomAdd {
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblRoomNumer = new JLabel("Room Numer");
-		lblRoomNumer.setBounds(26, 28, 200, 50);
+		lblRoomNumer.setBounds(26, 6, 200, 28);
 		frame.getContentPane().add(lblRoomNumer);
 		
 		JLabel lblCapacity = new JLabel("Capacity");
-		lblCapacity.setBounds(26, 105, 200, 50);
+		lblCapacity.setBounds(26, 42, 200, 28);
 		frame.getContentPane().add(lblCapacity);
 		
-		textField = new JTextField();
-		textField.setBounds(232, 28, 200, 50);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
+		JLabel lblRoomType = new JLabel("Room Type");
+		lblRoomType.setBounds(26, 82, 194, 28);
+		frame.getContentPane().add(lblRoomType);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(232, 105, 200, 50);
-		frame.getContentPane().add(textField_1);
+		JLabel lblPrice = new JLabel("Price");
+		lblPrice.setBounds(26, 122, 200, 28);
+		frame.getContentPane().add(lblPrice);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(232, 167, 200, 50);
-		frame.getContentPane().add(textField_2);
+		txtRoomNumber = new JTextField();
+		txtRoomNumber.setBounds(232, 6, 200, 28);
+		frame.getContentPane().add(txtRoomNumber);
+		txtRoomNumber.setColumns(10);
+		
+		txtCapacity = new JTextField();
+		txtCapacity.setColumns(10);
+		txtCapacity.setBounds(232, 46, 200, 28);
+		frame.getContentPane().add(txtCapacity);
+		
+		txtRoomType = new JTextField();
+		txtRoomType.setColumns(10);
+		txtRoomType.setBounds(232, 82, 200, 28);
+		frame.getContentPane().add(txtRoomType);
+
+		
+		txtPrice = new JTextField();
+		txtPrice.setBounds(232, 122, 200, 28);
+		frame.getContentPane().add(txtPrice);
+		txtPrice.setColumns(10);
 		
 		btnAddRoom = new JButton("Add Room");
 		btnAddRoom.setBounds(295, 229, 117, 29);
 		btnAddRoom.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				new AdminRoomControl().frame.setVisible(true);
+				adminConnect.addRooms(Integer.parseInt(txtRoomNumber.getText()), txtRoomType.getText(),
+						Integer.parseInt(txtCapacity.getText()), Double.parseDouble(txtPrice.getText()));
+				
+				new AdminRoomControl(adminConnect).frame.setVisible(true);
+
 				// Change later to visible
 				frame.dispose();
 			}
 		});
 		frame.getContentPane().add(btnAddRoom);
 		
-		JLabel lblRoomType = new JLabel("Room Type");
-		lblRoomType.setBounds(26, 188, 82, 16);
-		frame.getContentPane().add(lblRoomType);
+
+		
+		
 		
 
 	}

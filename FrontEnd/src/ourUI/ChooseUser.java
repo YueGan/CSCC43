@@ -71,10 +71,8 @@ public class ChooseUser {
 			public void actionPerformed(ActionEvent e) {
 				// Load Admin database and pass the parameter to next page
 				// todo.
-				RoomReservationPage customer = new RoomReservationPage();
-				customer.frame.setVisible(true);
-				customer.getConnection(new DBConnection("jdbc:mysql://localhost:3306/firstSchema",
-						"root", "260225towncenter"));
+				new RoomReservationPage(new DBConnection("jdbc:mysql://sql5.freemysqlhosting.net:3306/sql5112390", "sql5112390", "GRa9gFy4NQ")).frame.setVisible(true);
+
 				// Change later to visible
 				frame.dispose();
 			}

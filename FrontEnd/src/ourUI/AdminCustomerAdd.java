@@ -31,8 +31,7 @@ public class AdminCustomerAdd {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AdminCustomerAdd window = new AdminCustomerAdd();
-					window.frame.setVisible(true);
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -43,13 +42,11 @@ public class AdminCustomerAdd {
 	/**
 	 * Create the application.
 	 */
-	public AdminCustomerAdd() {
+	public AdminCustomerAdd(DBConnection adminConnect) {
+		this.adminConnect = adminConnect;
 		initialize();
 	}
 
-	public void getConnection(DBConnection givenConnect){
-		adminConnect = givenConnect;
-	}
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -119,7 +116,7 @@ public class AdminCustomerAdd {
 				
 				try{
 					adminConnect.addCustomer(firstName, lastName, idNumber, email, country);
-					new AdminRoomControl().frame.setVisible(true);
+					new AdminRoomControl(adminConnect).frame.setVisible(true);;
 					// Change later to visible
 					frame.dispose();
 				}

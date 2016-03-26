@@ -14,7 +14,7 @@ import javax.swing.JButton;
 
 public class AdminCustomerEdit {
 
-	private JFrame frame;
+	JFrame frame;
 	private JTextField txtFirstName;
 	private JTextField txtLastName;
 	private JTextField txtCustomerID;
@@ -31,8 +31,7 @@ public class AdminCustomerEdit {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AdminCustomerEdit window = new AdminCustomerEdit();
-					window.frame.setVisible(true);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -43,13 +42,11 @@ public class AdminCustomerEdit {
 	/**
 	 * Create the application.
 	 */
-	public AdminCustomerEdit() {
+	public AdminCustomerEdit(DBConnection adminConnect) {
+		this.adminConnect = adminConnect;
 		initialize();
 	}
 
-	public void getConnection(DBConnection givenConnect){
-		adminConnect = givenConnect;
-	}
 
 	
 	/**
@@ -117,12 +114,12 @@ public class AdminCustomerEdit {
 					JOptionPane.showMessageDialog(null,"Please generate a customer first!");
 				}
 				else{
-					adminConnect.updateMethod("customer", "fName", txtFirstName.getText(), "customerRef", customerRef);
-					adminConnect.updateMethod("customer", "lName", txtLastName.getText(), "customerRef", customerRef);
-					adminConnect.updateMethod("customer", "customerID", txtCustomerID.getText(), "customerRef", customerRef);
-					adminConnect.updateMethod("customer", "email", txtEmail.getText(), "customerRef", customerRef);
-					adminConnect.updateMethod("customer", "country", txtCountry.getText(), "customerRef", customerRef);
-					new AdminRoomControl().frame.setVisible(true);
+					adminConnect.updateMethod("customers", "fName", txtFirstName.getText(), "customerRef", customerRef);
+					adminConnect.updateMethod("customers", "lName", txtLastName.getText(), "customerRef", customerRef);
+					adminConnect.updateMethod("customers", "IDnumber", txtCustomerID.getText(), "customerRef", customerRef);
+					adminConnect.updateMethod("customers", "emailAddress", txtEmail.getText(), "customerRef", customerRef);
+					adminConnect.updateMethod("customers", "country", txtCountry.getText(), "customerRef", customerRef);
+					new AdminRoomControl(adminConnect).frame.setVisible(true);;
 					// Change later to visible
 					frame.dispose();
 				}
@@ -145,13 +142,16 @@ public class AdminCustomerEdit {
 			public void actionPerformed(ActionEvent e) {
 				
 				// Later, add try to catch if cusRef does not exist
-				result = adminConnect.getCustomer(txtCustomerRef.getText());
+				customerRef = txtCustomerRef.getText();
+				result = adminConnect.getCustomer(customerRef);
 				try{
-					txtFirstName.setText(result.getString("fName"));
-					txtLastName.setText(result.getString("lName"));
-					txtCustomerID.setText(result.getString("IDnumber"));
-					txtEmail.setText(result.getString("emailAddress"));
-					txtCountry.setText(result.getString("country"));
+					while(result.next()){
+						txtFirstName.setText(result.getString("fName"));
+						txtLastName.setText(result.getString("lName"));
+						txtCustomerID.setText(result.getString("IDnumber"));
+						txtEmail.setText(result.getString("emailAddress"));
+						txtCountry.setText(result.getString("country"));
+					}
 					
 				} catch (SQLException ef) {
 					// TODO Auto-generated catch block

@@ -10,7 +10,7 @@ import javax.swing.JButton;
 public class AdminRoomControl {
 
 	JFrame frame;
-
+	private DBConnection adminConnect;
 	/**
 	 * Launch the application.
 	 */
@@ -18,8 +18,9 @@ public class AdminRoomControl {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AdminRoomControl window = new AdminRoomControl();
-					window.frame.setVisible(true);
+
+					//AdminRoomControl window = new AdminRoomControl();
+					//window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -30,7 +31,8 @@ public class AdminRoomControl {
 	/**
 	 * Create the application.
 	 */
-	public AdminRoomControl() {
+	public AdminRoomControl(DBConnection adminConnect) {
+		this.adminConnect = adminConnect;
 		initialize();
 	}
 
@@ -42,12 +44,13 @@ public class AdminRoomControl {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
+
 		JButton btnNewButton = new JButton("Add Room");
 		btnNewButton.setBounds(65, 23, 328, 29);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new AdminRoomAdd().frame.setVisible(true);
+				new AdminRoomAdd(adminConnect).frame.setVisible(true);
+
 				// Change later to visible
 				frame.dispose();
 			}
@@ -58,7 +61,9 @@ public class AdminRoomControl {
 		btnEditRoomInformation.setBounds(65, 51, 328, 29);
 		btnEditRoomInformation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new AdminRoomEdit().frame.setVisible(true);
+				new AdminRoomEdit(adminConnect).frame.setVisible(true);
+
+				
 				// Change later to visible
 				frame.dispose();
 			}
@@ -69,7 +74,8 @@ public class AdminRoomControl {
 		btnAddCustomer.setBounds(65, 87, 328, 29);
 		btnAddCustomer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new AdminCustomerAdd().frame.setVisible(true);
+				new AdminCustomerAdd(adminConnect).frame.setVisible(true);
+
 				// Change later to visible
 				frame.dispose();
 			}
@@ -80,12 +86,24 @@ public class AdminRoomControl {
 		btnEditUser.setBounds(65, 128, 328, 29);
 		btnEditUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new AdminRoomEdit().frame.setVisible(true);
+				new AdminCustomerEdit(adminConnect).frame.setVisible(true);
+
 				// Change later to visible
 				frame.dispose();
 			}
 		});
 		frame.getContentPane().add(btnEditUser);
-	}
+		
+		JButton btnBack = new JButton("Back");
+		btnBack.setBounds(307, 216, 117, 29);
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new AdminControl(adminConnect).frame.setVisible(true);
 
+				// Change later to visible
+				frame.dispose();
+			}
+		});
+		frame.getContentPane().add(btnBack);
+	}
 }

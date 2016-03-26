@@ -4,19 +4,26 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ButtonModel;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
 public class CustomerReservation {
 
 	JFrame frame;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-
+	private JTextField txtFirstName;
+	private JTextField txtLastName;
+	private JTextField txtEmail;
+	private JTextField txtCountry;
+	private DBConnection adminConnect;
+	private String selectedRoom;
+	private JLabel label;
+	private JTextField txtCustomerID;
+	private String inDate;
+	private String outDate;
 	/**
 	 * Launch the application.
 	 */
@@ -24,7 +31,7 @@ public class CustomerReservation {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CustomerReservation window = new CustomerReservation();
+					CustomerReservation window = new CustomerReservation(new DBConnection("jdbc:mysql://sql5.freemysqlhosting.net:3306/sql5112390", "sql5112390", "GRa9gFy4NQ"), "", "" ,"");
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -36,7 +43,11 @@ public class CustomerReservation {
 	/**
 	 * Create the application.
 	 */
-	public CustomerReservation() {
+	public CustomerReservation(DBConnection adminConnect, String selectedRoom, String inDate, String outDate) {
+		this.inDate = inDate;
+		this.outDate = outDate;
+		this.selectedRoom = selectedRoom;
+		this.adminConnect = adminConnect;
 		initialize();
 	}
 
@@ -50,51 +61,74 @@ public class CustomerReservation {
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblFirstName = new JLabel("First Name");
-		lblFirstName.setBounds(10, 10, 111, 50);
+		lblFirstName.setBounds(10, -1, 111, 50);
 		frame.getContentPane().add(lblFirstName);
 		
 		JLabel lblLastName = new JLabel("Last Name");
-		lblLastName.setBounds(10, 51, 111, 50);
+		lblLastName.setBounds(6, 40, 111, 50);
 		frame.getContentPane().add(lblLastName);
 		
 		JLabel lblEmail = new JLabel("Email");
-		lblEmail.setBounds(10, 113, 111, 50);
+		lblEmail.setBounds(10, 119, 111, 50);
 		frame.getContentPane().add(lblEmail);
 		
 		JLabel lblPhoneNumber = new JLabel("Phone Number");
-		lblPhoneNumber.setBounds(10, 175, 111, 50);
+		lblPhoneNumber.setBounds(10, 160, 111, 50);
 		frame.getContentPane().add(lblPhoneNumber);
 		
-		textField = new JTextField();
-		textField.setBounds(109, 10, 200, 50);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
+		label = new JLabel("ID Number");
+		label.setBounds(6, 74, 111, 50);
+		frame.getContentPane().add(label);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(109, 73, 200, 50);
-		frame.getContentPane().add(textField_1);
-		textField_1.setColumns(10);
+		txtCustomerID = new JTextField();
+		txtCustomerID.setColumns(10);
+		txtCustomerID.setBounds(109, 92, 200, 29);
+		frame.getContentPane().add(txtCustomerID);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(109, 141, 200, 50);
-		frame.getContentPane().add(textField_2);
+		txtFirstName = new JTextField();
+		txtFirstName.setBounds(109, 10, 200, 29);
+		frame.getContentPane().add(txtFirstName);
+		txtFirstName.setColumns(10);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(109, 203, 200, 50);
-		frame.getContentPane().add(textField_3);
+		txtLastName = new JTextField();
+		txtLastName.setBounds(109, 51, 200, 29);
+		frame.getContentPane().add(txtLastName);
+		txtLastName.setColumns(10);
+		
+		txtEmail = new JTextField();
+		txtEmail.setColumns(10);
+		txtEmail.setBounds(109, 130, 200, 29);
+		frame.getContentPane().add(txtEmail);
+		
+		txtCountry = new JTextField();
+		txtCountry.setColumns(10);
+		txtCountry.setBounds(109, 171, 200, 29);
+		frame.getContentPane().add(txtCountry);
 		
 		JButton btnMakeReservation = new JButton("Make Reservation");
 		btnMakeReservation.setBounds(321, 243, 117, 29);
 		btnMakeReservation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new RoomReservationPage().frame.setVisible(true);
-				// Change later to visible
-				frame.dispose();
+				
+				if(txtFirstName.getText().equals("") || txtLastName.getText().equals("") ||
+						txtEmail.getText().equals("") || txtCustomerID.getText().equals("") ||
+						txtCountry.getText().equals("")){
+					JOptionPane.showMessageDialog(null,"Please enter all required field!");
+				}
+				else{
+					int customerRef = adminConnect.addCustomer(txtFirstName.getText(), txtLastName.getText(),
+							txtCustomerID.getText(),
+							txtEmail.getText(), txtCountry.getText());
+					adminConnect.addReservation(Integer.parseInt(selectedRoom), customerRef, inDate, outDate);
+					//addReservation(selectedRoom, );
+					new RoomReservationPage(adminConnect).frame.setVisible(true);
+					// Change later to visible
+					frame.dispose();
+				}
 			}
 		});
 		frame.getContentPane().add(btnMakeReservation);
-	}
+		
 
+	}
 }

@@ -96,9 +96,8 @@ public class AdminPage {
 				
 				if(tempAcc.equals(username) && tempPswd.equals(password)){
 				
-					AdminControl newAdmin = new AdminControl();
-					newAdmin.getConnection(new DBConnection("jdbc:mysql://localhost:3306/firstSchema", "root", "260225towncenter"));
-					newAdmin.frame.setVisible(true);
+					new AdminControl(new DBConnection("jdbc:mysql://sql5.freemysqlhosting.net:3306/sql5112390",
+							"sql5112390", "GRa9gFy4NQ")).frame.setVisible(true);
 					frame.dispose();
 				}
 				else{
