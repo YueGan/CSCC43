@@ -120,8 +120,7 @@ public class DBConnection {
 			Integer newinvoiceNumber;
 			ArrayList<Integer> invoiceNumberList = new ArrayList<Integer>();
 			ResultSet invoiceNumberAddressSet = myStmt.executeQuery("SELECT invoiceNumber"
-					+ "merRef FROM firstschema.invoice"
-					+ "");
+					+ " FROM firstschema.invoice");
 			while(invoiceNumberAddressSet.next()){
 				invoiceNumberList.add(Integer.parseInt(invoiceNumberAddressSet.getString("invoice")));
 			}
