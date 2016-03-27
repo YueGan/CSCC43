@@ -20,9 +20,23 @@ public class DBConnection {
 	}
 	
 	public ResultSet getReservation(String reservationRef){
+		try {
+			Statement myStmt = conn.createStatement();
+			return myStmt.executeQuery("SELECT * FROM reservation WHERE reservationRef = '" + reservationRef +"'");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 	public ResultSet getInvoice(String reservationRef){
+		try {
+			Statement myStmt = conn.createStatement();
+			return myStmt.executeQuery("SELECT * FROM invoice WHERE reservationRef = '" + reservationRef +"'");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 	public ResultSet getSearch(String capacity, String checkIn, String checkOut){
@@ -30,14 +44,15 @@ public class DBConnection {
 			//
 			Statement myStmt = conn.createStatement();
 			// get result table set
-			ResultSet myRs = myStmt.executeQuery("SELECT * FROM room WHERE capacity >= '" + capacity +
-					"' ");
+			ResultSet myRs = myStmt.executeQuery("SELECT roomNumber FROM room WHERE capacity >= '" + capacity +
+					"' AND roomNumber NOT IN (SELECT roomNumber FROM reservation WHERE not((Indate <= "+
+					checkIn +") AND ("+ checkIn + " < " + checkOut +") AND ( " + checkOut +" <= Outdate))");
+
 			return myRs;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return null;
 		
 	}
@@ -101,7 +116,7 @@ public class DBConnection {
 			String query = "INSERT INTO customers"
 					+ "(customerRef, fName, lName, IDnumber, emailAddress, country)"
 					+ "VALUES(" + entity + ")"; 
-			// 
+			// [
 			myStmt.executeUpdate(query);
 			System.out.println("New Customer Insert Completed");
 			
