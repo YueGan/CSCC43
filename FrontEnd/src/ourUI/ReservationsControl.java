@@ -58,80 +58,81 @@ public class ReservationsControl {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setTitle("Editing Reservation Page");  
+		frame.setBounds(100, 100, 700, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblReservation = new JLabel("Reservation #");
-		lblReservation.setBounds(29, 6, 200, 23);
+		JLabel lblReservation = new JLabel("Reservation Number");
+		lblReservation.setBounds(99, 43, 200, 23);
 		frame.getContentPane().add(lblReservation);
 		
 		JLabel lblRoomNumber = new JLabel("Room Number");
-		lblRoomNumber.setBounds(26, 53, 104, 23);
+		lblRoomNumber.setBounds(29, 136, 104, 23);
 		frame.getContentPane().add(lblRoomNumber);
 		
 		JLabel label = new JLabel("InDate");
-		label.setBounds(26, 84, 104, 23);
+		label.setBounds(26, 204, 104, 23);
 		frame.getContentPane().add(label);
 		
 		JLabel label_1 = new JLabel("OutDate");
-		label_1.setBounds(26, 118, 104, 23);
+		label_1.setBounds(26, 253, 104, 23);
 		frame.getContentPane().add(label_1);
 		
 		JLabel label_2 = new JLabel("Price");
-		label_2.setBounds(26, 147, 104, 23);
+		label_2.setBounds(351, 314, 104, 23);
 		frame.getContentPane().add(label_2);
 		
 		JLabel label_3 = new JLabel("PayingMethod");
-		label_3.setBounds(26, 178, 104, 23);
+		label_3.setBounds(26, 314, 104, 23);
 		frame.getContentPane().add(label_3);
 		
 		JLabel label_4 = new JLabel("Comments");
-		label_4.setBounds(26, 203, 104, 23);
+		label_4.setBounds(29, 370, 63, 23);
 		frame.getContentPane().add(label_4);
 		
 		txtRoomNumber = new JTextField();
-		txtRoomNumber.setBounds(175, 53, 150, 28);
+		txtRoomNumber.setBounds(124, 134, 150, 28);
 		frame.getContentPane().add(txtRoomNumber);
 		txtRoomNumber.setColumns(10);
 		
 		txtInDate = new JTextField();
 		txtInDate.setColumns(10);
-		txtInDate.setBounds(175, 81, 150, 28);
+		txtInDate.setBounds(124, 202, 150, 28);
 		frame.getContentPane().add(txtInDate);
 		
 		txtOutDate = new JTextField();
 		txtOutDate.setColumns(10);
-		txtOutDate.setBounds(175, 115, 150, 28);
+		txtOutDate.setBounds(124, 251, 150, 28);
 		frame.getContentPane().add(txtOutDate);
 		
 		txtPrice = new JTextField();
 		txtPrice.setColumns(10);
-		txtPrice.setBounds(175, 144, 150, 28);
+		txtPrice.setBounds(416, 312, 209, 28);
 		frame.getContentPane().add(txtPrice);
 		
 		txtPayingMethod = new JTextField();
 		txtPayingMethod.setColumns(10);
-		txtPayingMethod.setBounds(175, 175, 150, 28);
+		txtPayingMethod.setBounds(124, 312, 175, 28);
 		frame.getContentPane().add(txtPayingMethod);
 		
 		txtComments = new JTextField();
 		txtComments.setColumns(10);
-		txtComments.setBounds(175, 203, 150, 28);
+		txtComments.setBounds(124, 368, 505, 28);
 		frame.getContentPane().add(txtComments);
 		
 		txtReservationRef = new JTextField();
-		txtReservationRef.setBounds(240, 5, 166, 23);
+		txtReservationRef.setBounds(243, 43, 187, 23);
 		frame.getContentPane().add(txtReservationRef);
 		txtReservationRef.setColumns(10);
 		
 		txtisPaid = new JTextField();
-		txtisPaid.setBounds(362, 144, 50, 28);
+		txtisPaid.setBounds(497, 165, 50, 28);
 		frame.getContentPane().add(txtisPaid);
 		txtisPaid.setColumns(10);
 		
 		JButton btnGenerate = new JButton("Generate");
-		btnGenerate.setBounds(327, 40, 117, 29);
+		btnGenerate.setBounds(524, 40, 117, 29);
 		btnGenerate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -155,7 +156,7 @@ public class ReservationsControl {
 		
 		
 		JButton btnBack = new JButton("Cancel");
-		btnBack.setBounds(208, 243, 117, 29);
+		btnBack.setBounds(430, 422, 117, 29);
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new AdminControl(adminConnect).frame.setVisible(true);
@@ -167,7 +168,7 @@ public class ReservationsControl {
 		frame.getContentPane().add(btnBack);
 		
 		JButton btnUpdate = new JButton("Update");
-		btnUpdate.setBounds(327, 243, 117, 29);
+		btnUpdate.setBounds(557, 422, 117, 29);
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(txtReservationRef.getText().equals("")){
@@ -189,7 +190,7 @@ public class ReservationsControl {
 		frame.getContentPane().add(btnUpdate);
 		
 		JLabel lblPaid = new JLabel("Paid ?");
-		lblPaid.setBounds(362, 104, 44, 50);
+		lblPaid.setBounds(503, 122, 44, 50);
 		frame.getContentPane().add(lblPaid);
 		
 		

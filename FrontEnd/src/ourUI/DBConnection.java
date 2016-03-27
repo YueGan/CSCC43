@@ -232,7 +232,7 @@ public class DBConnection {
 	
 	public static void main(String[] args) {
 //		  try { 
-//			   Class.forName("com.mysql.jdbc.Driver");   //¼ÓÔØMYSQL JDBCÇý¶¯³ÌÐò  
+//			   Class.forName("com.mysql.jdbc.Driver");   //翹�YSQL JDBC�蝓黑純傢�  
 //			   //Class.forName("org.gjt.mm.mysql.Driver"); 
 //			   System.out.println("Success loading Mysql Driver!"); 
 //			  } 

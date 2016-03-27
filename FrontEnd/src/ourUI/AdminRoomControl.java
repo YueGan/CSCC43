@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
+import java.awt.Font;
 
 public class AdminRoomControl {
 
@@ -19,8 +20,8 @@ public class AdminRoomControl {
 			public void run() {
 				try {
 
-					//AdminRoomControl window = new AdminRoomControl();
-					//window.frame.setVisible(true);
+					AdminRoomControl window = new AdminRoomControl();
+					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -41,12 +42,14 @@ public class AdminRoomControl {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setTitle("Administrative Controling Panel");  
+		frame.setBounds(100, 100, 700, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
 		JButton btnNewButton = new JButton("Add Room");
-		btnNewButton.setBounds(65, 23, 328, 29);
+		btnNewButton.setFont(new Font("Bodoni MT Black", Font.PLAIN, 17));
+		btnNewButton.setBounds(165, 39, 350, 55);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new AdminRoomAdd(adminConnect).frame.setVisible(true);
@@ -58,7 +61,8 @@ public class AdminRoomControl {
 		frame.getContentPane().add(btnNewButton);
 		
 		JButton btnEditRoomInformation = new JButton("Edit Room Information");
-		btnEditRoomInformation.setBounds(65, 51, 328, 29);
+		btnEditRoomInformation.setFont(new Font("Bodoni MT Black", Font.PLAIN, 17));
+		btnEditRoomInformation.setBounds(165, 127, 350, 55);
 		btnEditRoomInformation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new AdminRoomEdit(adminConnect).frame.setVisible(true);
@@ -71,7 +75,8 @@ public class AdminRoomControl {
 		frame.getContentPane().add(btnEditRoomInformation);
 		
 		JButton btnAddCustomer = new JButton("Add Customer");
-		btnAddCustomer.setBounds(65, 87, 328, 29);
+		btnAddCustomer.setFont(new Font("Bodoni MT Black", Font.PLAIN, 17));
+		btnAddCustomer.setBounds(165, 211, 350, 55);
 		btnAddCustomer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new AdminCustomerAdd(adminConnect).frame.setVisible(true);
@@ -83,7 +88,8 @@ public class AdminRoomControl {
 		frame.getContentPane().add(btnAddCustomer);
 		
 		JButton btnEditUser = new JButton("Edit User");
-		btnEditUser.setBounds(65, 128, 328, 29);
+		btnEditUser.setFont(new Font("Bodoni MT Black", Font.PLAIN, 17));
+		btnEditUser.setBounds(165, 296, 350, 55);
 		btnEditUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new AdminCustomerEdit(adminConnect).frame.setVisible(true);
@@ -95,7 +101,7 @@ public class AdminRoomControl {
 		frame.getContentPane().add(btnEditUser);
 		
 		JButton btnBack = new JButton("Back");
-		btnBack.setBounds(307, 216, 117, 29);
+		btnBack.setBounds(557, 422, 117, 29);
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new AdminControl(adminConnect).frame.setVisible(true);

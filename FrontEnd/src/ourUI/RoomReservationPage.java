@@ -39,8 +39,8 @@ public class RoomReservationPage {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					//RoomReservationPage window = new RoomReservationPage(new DBConnection("jdbc:mysql://sql5.freemysqlhosting.net:3306/sql5112390", "sql5112390", "GRa9gFy4NQ"));
-					//window.frame.setVisible(true);
+					RoomReservationPage window = new RoomReservationPage(new DBConnection("jdbc:mysql://sql5.freemysqlhosting.net:3306/sql5112390", "sql5112390", "GRa9gFy4NQ"));
+					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -60,47 +60,48 @@ public class RoomReservationPage {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setTitle("Search");  
+		frame.setBounds(100, 100, 700, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblCapacity = new JLabel("Capacity");
-		lblCapacity.setBounds(25, 16, 61, 25);
+		JLabel lblCapacity = new JLabel("Room Size");
+		lblCapacity.setBounds(101, 10, 68, 25);
 		frame.getContentPane().add(lblCapacity);
 		
 		JLabel label = new JLabel("Check in(dd-MM-yyyy)");
-		label.setBounds(176, 16, 61, 25);
+		label.setBounds(246, 10, 134, 25);
 		frame.getContentPane().add(label);
 		
 		JLabel label_1 = new JLabel("Check out(dd-MM-yyyy)");
-		label_1.setBounds(313, 16, 102, 25);
+		label_1.setBounds(443, 10, 173, 25);
 		frame.getContentPane().add(label_1);
 		
 		txtCapacity = new JTextField();
-		txtCapacity.setBounds(25, 42, 68, 28);
+		txtCapacity.setBounds(101, 67, 68, 28);
 		frame.getContentPane().add(txtCapacity);
 		txtCapacity.setColumns(10);
 		
 		txtCheckIn = new JTextField();
-		txtCheckIn.setBounds(157, 42, 134, 28);
+		txtCheckIn.setBounds(246, 67, 134, 28);
 		frame.getContentPane().add(txtCheckIn);
 		txtCheckIn.setColumns(10);
 		
 		txtCheckOut = new JTextField();
-		txtCheckOut.setBounds(310, 42, 134, 28);
+		txtCheckOut.setBounds(443, 67, 134, 28);
 		frame.getContentPane().add(txtCheckOut);
 		txtCheckOut.setColumns(10);
 		
-		JLabel lblDisplayOptionHere = new JLabel("Display Option Here");
-		lblDisplayOptionHere.setBounds(25, 92, 200, 50);
+		JLabel lblDisplayOptionHere = new JLabel("Option(s) : ");
+		lblDisplayOptionHere.setBounds(10, 118, 200, 50);
 		frame.getContentPane().add(lblDisplayOptionHere);
 		
 		Panel optionPanel = new Panel();
-		optionPanel.setBounds(10, 137, 311, 131);
+		optionPanel.setBounds(10, 157, 664, 259);
 		frame.getContentPane().add(optionPanel);
 		
-		JButton btnGenerate = new JButton("Generate");
-		btnGenerate.setBounds(284, 82, 117, 29);
+		JButton btnGenerate = new JButton("Search");
+		btnGenerate.setBounds(544, 105, 117, 29);
 		btnGenerate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -143,7 +144,7 @@ public class RoomReservationPage {
 		frame.getContentPane().add(btnGenerate);
 		
 		JButton btnNext = new JButton("Next");
-		btnNext.setBounds(327, 239, 117, 29);
+		btnNext.setBounds(557, 422, 117, 29);
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(group == null){

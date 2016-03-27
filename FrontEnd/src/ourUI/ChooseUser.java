@@ -1,12 +1,17 @@
 package ourUI;
 
 import java.awt.EventQueue;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.SwingConstants;
+import java.awt.Font;
 
 public class ChooseUser {
 
@@ -40,20 +45,26 @@ public class ChooseUser {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setTitle("Welcome Page");  
+		frame.setBounds(100, 100, 700, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblWecomeToHotel = new JLabel("Wecome to Hotel Management System 2.0");
-		lblWecomeToHotel.setBounds(104, 42, 277, 16);
+		JLabel lblWecomeToHotel = new JLabel("Wecome to Four Point O Hotel Managing System 2.0");
+		lblWecomeToHotel.setFont(new Font("Mistral", Font.BOLD, 20));
+		lblWecomeToHotel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblWecomeToHotel.setBounds(0, 38, 684, 29);
 		frame.getContentPane().add(lblWecomeToHotel);
 		
 		JLabel lblLogInAs = new JLabel("Proceed in as:");
-		lblLogInAs.setBounds(22, 134, 103, 16);
+		lblLogInAs.setBounds(93, 368, 103, 16);
 		frame.getContentPane().add(lblLogInAs);
 		
+		//Image image=new ImageIcon("icon.jpg").getImage();  
+		//JPanel panel = new BackgroundPanel(image);  
+		
 		JButton btnAdministrator = new JButton("Administrator");
-		btnAdministrator.setBounds(142, 129, 117, 29);
+		btnAdministrator.setBounds(251, 362, 117, 29);
 		btnAdministrator.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Load Admin database and pass the parameter to next page
@@ -66,7 +77,7 @@ public class ChooseUser {
 		frame.getContentPane().add(btnAdministrator);
 		
 		JButton btnCustomer = new JButton("Customer");
-		btnCustomer.setBounds(286, 129, 117, 29);
+		btnCustomer.setBounds(462, 362, 117, 29);
 		btnCustomer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Load Admin database and pass the parameter to next page
@@ -78,5 +89,13 @@ public class ChooseUser {
 			}
 		});
 		frame.getContentPane().add(btnCustomer);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Danny Chen\\Desktop\\cscc43Project\\CSCC43\\FrontEnd\\src\\icon.jpg"));
+		lblNewLabel.setBounds(39, 77, 596, 273);
+		frame.getContentPane().add(lblNewLabel);
+		
+		
 	}
 }

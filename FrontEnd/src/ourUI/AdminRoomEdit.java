@@ -29,7 +29,8 @@ public class AdminRoomEdit {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-
+					AdminRoomEdit window = new AdminRoomEdit();
+					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -52,50 +53,51 @@ public class AdminRoomEdit {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setTitle("Editing Romm");  
+		frame.setBounds(100, 100, 700, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		System.out.println("AdminRoomEdit");
 		adminConnect.executeQuery("SELECT * FROM customers;");
 		JLabel lblRoomNumer = new JLabel("Room Numer");
-		lblRoomNumer.setBounds(26, 6, 200, 28);
+		lblRoomNumer.setBounds(87, 77, 200, 28);
 		frame.getContentPane().add(lblRoomNumer);
 		
 		JLabel lblCapacity = new JLabel("Capacity");
-		lblCapacity.setBounds(26, 88, 200, 28);
+		lblCapacity.setBounds(87, 207, 200, 28);
 		frame.getContentPane().add(lblCapacity);
 		
 		JLabel lblRoomType = new JLabel("Room Type");
-		lblRoomType.setBounds(26, 128, 194, 28);
+		lblRoomType.setBounds(87, 245, 194, 28);
 		frame.getContentPane().add(lblRoomType);
 		
 		JLabel lblPrice = new JLabel("Price");
-		lblPrice.setBounds(26, 168, 200, 28);
+		lblPrice.setBounds(87, 285, 200, 28);
 		frame.getContentPane().add(lblPrice);
 		
 		txtRoomNumber = new JTextField();
-		txtRoomNumber.setBounds(232, 6, 200, 28);
+		txtRoomNumber.setBounds(259, 78, 200, 28);
 		frame.getContentPane().add(txtRoomNumber);
 		txtRoomNumber.setColumns(10);
 		
 		txtCapacity = new JTextField();
 		txtCapacity.setColumns(10);
-		txtCapacity.setBounds(232, 92, 200, 28);
+		txtCapacity.setBounds(323, 208, 200, 28);
 		frame.getContentPane().add(txtCapacity);
 		
 		txtRoomType = new JTextField();
 		txtRoomType.setColumns(10);
-		txtRoomType.setBounds(232, 128, 200, 28);
+		txtRoomType.setBounds(323, 246, 200, 28);
 		frame.getContentPane().add(txtRoomType);
 
 		
 		txtPrice = new JTextField();
-		txtPrice.setBounds(232, 168, 200, 28);
+		txtPrice.setBounds(323, 286, 200, 28);
 		frame.getContentPane().add(txtPrice);
 		txtPrice.setColumns(10);
 		
 		JButton btnGenerate = new JButton("Generate");
-		btnGenerate.setBounds(232, 46, 117, 29);
+		btnGenerate.setBounds(406, 116, 117, 29);
 		btnGenerate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -117,7 +119,7 @@ public class AdminRoomEdit {
 		frame.getContentPane().add(btnGenerate);
 		
 		JButton btnSave = new JButton("Save");
-		btnSave.setBounds(294, 229, 117, 29);
+		btnSave.setBounds(557, 422, 117, 29);
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(txtRoomNumber.equals("")){

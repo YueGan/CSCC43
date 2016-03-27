@@ -31,6 +31,8 @@ public class AdminCustomerEdit {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					AdminCustomerEdit window = new AdminCustomerEdit();
+					window.frame.setVisible(true);
 					
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -54,54 +56,55 @@ public class AdminCustomerEdit {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setTitle("Editing Customer Info");  
 		frame.setBounds(100, 100, 710, 440);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		
 		JLabel lblName = new JLabel("First Name");
-		lblName.setBounds(29, 39, 75, 29);
+		lblName.setBounds(29, 95, 75, 29);
 		frame.getContentPane().add(lblName);
 		
 		JLabel label = new JLabel("Last Name");
-		label.setBounds(29, 80, 75, 29);
+		label.setBounds(29, 134, 75, 29);
 		frame.getContentPane().add(label);
 		
 		JLabel label_1 = new JLabel("ID Number");
-		label_1.setBounds(29, 133, 75, 29);
+		label_1.setBounds(29, 243, 75, 29);
 		frame.getContentPane().add(label_1);
 		
 		JLabel label_2 = new JLabel("Email");
-		label_2.setBounds(29, 174, 75, 29);
+		label_2.setBounds(29, 282, 75, 29);
 		frame.getContentPane().add(label_2);
 		
 		JLabel label_3 = new JLabel("Country");
-		label_3.setBounds(29, 225, 75, 29);
+		label_3.setBounds(29, 204, 75, 29);
 		frame.getContentPane().add(label_3);
 		
 		txtFirstName = new JTextField();
-		txtFirstName.setBounds(286, 39, 134, 28);
+		txtFirstName.setBounds(114, 96, 134, 28);
 		frame.getContentPane().add(txtFirstName);
 		txtFirstName.setColumns(10);
 		
 		txtLastName = new JTextField();
 		txtLastName.setColumns(10);
-		txtLastName.setBounds(286, 80, 134, 28);
+		txtLastName.setBounds(113, 135, 134, 28);
 		frame.getContentPane().add(txtLastName);
 		
 		txtCustomerID = new JTextField();
 		txtCustomerID.setColumns(10);
-		txtCustomerID.setBounds(286, 133, 134, 28);
+		txtCustomerID.setBounds(114, 244, 251, 28);
 		frame.getContentPane().add(txtCustomerID);
 		
 		txtEmail = new JTextField();
 		txtEmail.setColumns(10);
-		txtEmail.setBounds(286, 174, 134, 28);
+		txtEmail.setBounds(114, 283, 501, 28);
 		frame.getContentPane().add(txtEmail);
 		
 		txtCountry = new JTextField();
 		txtCountry.setColumns(10);
-		txtCountry.setBounds(286, 225, 134, 28);
+		txtCountry.setBounds(114, 205, 251, 28);
 		frame.getContentPane().add(txtCountry);
 		
 
@@ -128,16 +131,16 @@ public class AdminCustomerEdit {
 		frame.getContentPane().add(btnUpdate);
 		
 		JLabel lblCustomerReferenceNumber = new JLabel("Customer Reference Number");
-		lblCustomerReferenceNumber.setBounds(29, 11, 188, 16);
+		lblCustomerReferenceNumber.setBounds(63, 36, 218, 37);
 		frame.getContentPane().add(lblCustomerReferenceNumber);
 		
 		txtCustomerRef = new JTextField();
-		txtCustomerRef.setBounds(286, 5, 134, 28);
+		txtCustomerRef.setBounds(269, 41, 202, 28);
 		frame.getContentPane().add(txtCustomerRef);
 		txtCustomerRef.setColumns(10);
 		
 		JButton btnGenerate = new JButton("Generate");
-		btnGenerate.setBounds(457, 6, 117, 29);
+		btnGenerate.setBounds(512, 40, 117, 29);
 		btnGenerate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				

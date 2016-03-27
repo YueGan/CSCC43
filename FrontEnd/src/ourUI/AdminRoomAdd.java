@@ -8,6 +8,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JToolBar;
+import javax.swing.JList;
 
 public class AdminRoomAdd {
 
@@ -26,6 +28,8 @@ public class AdminRoomAdd {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					AdminRoomAdd window = new AdminRoomAdd();
+					window.frame.setVisible(true);
 
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -49,49 +53,50 @@ public class AdminRoomAdd {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setTitle("Add new room (by Admin)");  
+		frame.setBounds(100, 100, 700, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblRoomNumer = new JLabel("Room Numer");
-		lblRoomNumer.setBounds(26, 6, 200, 28);
+		lblRoomNumer.setBounds(85, 58, 200, 28);
 		frame.getContentPane().add(lblRoomNumer);
 		
 		JLabel lblCapacity = new JLabel("Capacity");
-		lblCapacity.setBounds(26, 42, 200, 28);
+		lblCapacity.setBounds(85, 123, 200, 28);
 		frame.getContentPane().add(lblCapacity);
 		
 		JLabel lblRoomType = new JLabel("Room Type");
-		lblRoomType.setBounds(26, 82, 194, 28);
+		lblRoomType.setBounds(85, 197, 194, 28);
 		frame.getContentPane().add(lblRoomType);
 		
 		JLabel lblPrice = new JLabel("Price");
-		lblPrice.setBounds(26, 122, 200, 28);
+		lblPrice.setBounds(85, 272, 200, 28);
 		frame.getContentPane().add(lblPrice);
 		
 		txtRoomNumber = new JTextField();
-		txtRoomNumber.setBounds(232, 6, 200, 28);
+		txtRoomNumber.setBounds(319, 59, 200, 28);
 		frame.getContentPane().add(txtRoomNumber);
 		txtRoomNumber.setColumns(10);
 		
 		txtCapacity = new JTextField();
 		txtCapacity.setColumns(10);
-		txtCapacity.setBounds(232, 46, 200, 28);
+		txtCapacity.setBounds(319, 124, 200, 28);
 		frame.getContentPane().add(txtCapacity);
 		
 		txtRoomType = new JTextField();
 		txtRoomType.setColumns(10);
-		txtRoomType.setBounds(232, 82, 200, 28);
+		txtRoomType.setBounds(319, 198, 200, 28);
 		frame.getContentPane().add(txtRoomType);
 
 		
 		txtPrice = new JTextField();
-		txtPrice.setBounds(232, 122, 200, 28);
+		txtPrice.setBounds(319, 273, 200, 28);
 		frame.getContentPane().add(txtPrice);
 		txtPrice.setColumns(10);
 		
 		btnAddRoom = new JButton("Add Room");
-		btnAddRoom.setBounds(295, 229, 117, 29);
+		btnAddRoom.setBounds(557, 422, 117, 29);
 		btnAddRoom.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				

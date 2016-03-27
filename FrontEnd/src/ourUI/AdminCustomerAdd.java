@@ -19,7 +19,6 @@ public class AdminCustomerAdd {
 	private JTextField AdminAddCustomerIDnumber;
 	private JTextField AdminAddCustomerEmail;
 	private JTextField AdminAddCustomerCountry;
-	private JTextField AdminAddCustomerCID;
 	
 	private String firstName, lastName, idNumber, email, country;
 	private DBConnection adminConnect;
@@ -31,7 +30,8 @@ public class AdminCustomerAdd {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-
+					AdminCustomerAdd window = new AdminCustomerAdd();
+					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -57,48 +57,48 @@ public class AdminCustomerAdd {
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblName = new JLabel("First Name");
-		lblName.setBounds(10, 5, 76, 29);
+		lblName.setBounds(10, 60, 76, 29);
 		frame.getContentPane().add(lblName);
 		
 		JLabel label = new JLabel("Last Name");
-		label.setBounds(10, 44, 76, 29);
+		label.setBounds(10, 99, 76, 29);
 		frame.getContentPane().add(label);
 		
 		JLabel label_1 = new JLabel("ID Number");
-		label_1.setBounds(10, 115, 76, 29);
+		label_1.setBounds(10, 234, 76, 29);
 		frame.getContentPane().add(label_1);
 		
 		JLabel label_2 = new JLabel("Email");
-		label_2.setBounds(10, 154, 76, 29);
+		label_2.setBounds(10, 288, 76, 29);
 		frame.getContentPane().add(label_2);
 		
 		JLabel label_3 = new JLabel("Country");
-		label_3.setBounds(248, 115, 76, 29);
+		label_3.setBounds(10, 174, 76, 29);
 		frame.getContentPane().add(label_3);
 		
 		AdminAddCustomerfName = new JTextField();
-		AdminAddCustomerfName.setBounds(71, 6, 138, 28);
+		AdminAddCustomerfName.setBounds(96, 61, 138, 28);
 		frame.getContentPane().add(AdminAddCustomerfName);
 		AdminAddCustomerfName.setColumns(10);
 		
 		AdminAddCustomerlName = new JTextField();
 		AdminAddCustomerlName.setColumns(10);
-		AdminAddCustomerlName.setBounds(71, 45, 138, 28);
+		AdminAddCustomerlName.setBounds(96, 100, 138, 28);
 		frame.getContentPane().add(AdminAddCustomerlName);
 		
 		AdminAddCustomerIDnumber = new JTextField();
 		AdminAddCustomerIDnumber.setColumns(10);
-		AdminAddCustomerIDnumber.setBounds(71, 116, 138, 28);
+		AdminAddCustomerIDnumber.setBounds(96, 235, 248, 28);
 		frame.getContentPane().add(AdminAddCustomerIDnumber);
 		
 		AdminAddCustomerEmail = new JTextField();
 		AdminAddCustomerEmail.setColumns(10);
-		AdminAddCustomerEmail.setBounds(71, 155, 138, 28);
+		AdminAddCustomerEmail.setBounds(96, 289, 463, 28);
 		frame.getContentPane().add(AdminAddCustomerEmail);
 		
 		AdminAddCustomerCountry = new JTextField();
 		AdminAddCustomerCountry.setColumns(10);
-		AdminAddCustomerCountry.setBounds(295, 116, 138, 28);
+		AdminAddCustomerCountry.setBounds(96, 175, 248, 28);
 		frame.getContentPane().add(AdminAddCustomerCountry);
 		
 		JButton btnAddClient = new JButton("Add Customer");
@@ -115,7 +115,10 @@ public class AdminCustomerAdd {
 				country = AdminAddCustomerCountry.getText();
 				
 				try{
-					adminConnect.addCustomer(firstName, lastName, idNumber, email, country);
+					int customerID = adminConnect.addCustomer(firstName, lastName, idNumber, email, country);
+					String message = "New customer (" + customerID + ")" + "is added.";
+					JOptionPane.showMessageDialog(null,message);
+					// make sure here
 					new AdminRoomControl(adminConnect).frame.setVisible(true);;
 					// Change later to visible
 					frame.dispose();
@@ -129,24 +132,6 @@ public class AdminCustomerAdd {
 			}
 		});
 		frame.getContentPane().add(btnAddClient);
-		
-		JLabel lblCustomerId = new JLabel("Customer ID");
-		lblCustomerId.setBounds(340, 5, 161, 29);
-		frame.getContentPane().add(lblCustomerId);
-		
-		AdminAddCustomerCID = new JTextField();
-		AdminAddCustomerCID.setBounds(389, 45, 138, 28);
-		frame.getContentPane().add(AdminAddCustomerCID);
-		AdminAddCustomerCID.setColumns(10);
-		
-		JButton btnGenerate = new JButton("Generate");
-		btnGenerate.setBounds(581, 47, 87, 23);
-
-		frame.getContentPane().add(btnGenerate);
-		
-		JLabel lblAddress = new JLabel("Address");
-		lblAddress.setBounds(10, 226, 76, 29);
-		frame.getContentPane().add(lblAddress);
 		
 	}
 	

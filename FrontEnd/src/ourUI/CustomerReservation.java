@@ -56,57 +56,58 @@ public class CustomerReservation {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setTitle("Reservation Page");  
+		frame.setBounds(100, 100, 700, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblFirstName = new JLabel("First Name");
-		lblFirstName.setBounds(10, -1, 111, 50);
+		lblFirstName.setBounds(38, 73, 111, 50);
 		frame.getContentPane().add(lblFirstName);
 		
 		JLabel lblLastName = new JLabel("Last Name");
-		lblLastName.setBounds(6, 40, 111, 50);
+		lblLastName.setBounds(38, 133, 111, 50);
 		frame.getContentPane().add(lblLastName);
 		
 		JLabel lblEmail = new JLabel("Email");
-		lblEmail.setBounds(10, 119, 111, 50);
+		lblEmail.setBounds(38, 292, 111, 50);
 		frame.getContentPane().add(lblEmail);
 		
-		JLabel lblPhoneNumber = new JLabel("Phone Number");
-		lblPhoneNumber.setBounds(10, 160, 111, 50);
+		JLabel lblPhoneNumber = new JLabel("Country");
+		lblPhoneNumber.setBounds(38, 193, 111, 50);
 		frame.getContentPane().add(lblPhoneNumber);
 		
 		label = new JLabel("ID Number");
-		label.setBounds(6, 74, 111, 50);
+		label.setBounds(38, 242, 111, 50);
 		frame.getContentPane().add(label);
 		
 		txtCustomerID = new JTextField();
 		txtCustomerID.setColumns(10);
-		txtCustomerID.setBounds(109, 92, 200, 29);
+		txtCustomerID.setBounds(137, 253, 200, 29);
 		frame.getContentPane().add(txtCustomerID);
 		
 		txtFirstName = new JTextField();
-		txtFirstName.setBounds(109, 10, 200, 29);
+		txtFirstName.setBounds(137, 84, 158, 29);
 		frame.getContentPane().add(txtFirstName);
 		txtFirstName.setColumns(10);
 		
 		txtLastName = new JTextField();
-		txtLastName.setBounds(109, 51, 200, 29);
+		txtLastName.setBounds(137, 144, 158, 29);
 		frame.getContentPane().add(txtLastName);
 		txtLastName.setColumns(10);
 		
 		txtEmail = new JTextField();
 		txtEmail.setColumns(10);
-		txtEmail.setBounds(109, 130, 200, 29);
+		txtEmail.setBounds(137, 303, 475, 29);
 		frame.getContentPane().add(txtEmail);
 		
 		txtCountry = new JTextField();
 		txtCountry.setColumns(10);
-		txtCountry.setBounds(109, 171, 200, 29);
+		txtCountry.setBounds(137, 204, 200, 29);
 		frame.getContentPane().add(txtCountry);
 		
 		JButton btnMakeReservation = new JButton("Make Reservation");
-		btnMakeReservation.setBounds(321, 243, 117, 29);
+		btnMakeReservation.setBounds(539, 382, 117, 29);
 		btnMakeReservation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -119,7 +120,10 @@ public class CustomerReservation {
 					int customerRef = adminConnect.addCustomer(txtFirstName.getText(), txtLastName.getText(),
 							txtCustomerID.getText(),
 							txtEmail.getText(), txtCountry.getText());
-					adminConnect.addReservation(Integer.parseInt(selectedRoom), customerRef, inDate, outDate);
+					reservationNum = adminConnect.addReservation(Integer.parseInt(selectedRoom), customerRef, inDate, outDate);
+					//~~~~~~ Help to return rervation Number here 
+					//String message = "Your reservation "+ reservationNum    + "is completed ! ";
+					//JOptionPane.showMessageDialog(null,"Please enter all required field!");
 					//addReservation(selectedRoom, );
 					new RoomReservationPage(adminConnect).frame.setVisible(true);
 					// Change later to visible

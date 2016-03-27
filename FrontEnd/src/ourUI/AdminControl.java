@@ -10,6 +10,8 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import java.awt.Font;
 
 public class AdminControl {
 
@@ -22,8 +24,8 @@ public class AdminControl {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					//AdminControl window = new AdminControl(new DBConnection("jdbc:mysql://sql5.freemysqlhosting.net:3306/sql5112390", "sql5112390", "GRa9gFy4NQ"));
-					//window.frame.setVisible(true);
+					AdminControl window = new AdminControl(new DBConnection("jdbc:mysql://sql5.freemysqlhosting.net:3306/sql5112390", "sql5112390", "GRa9gFy4NQ"));
+					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -44,11 +46,13 @@ public class AdminControl {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setTitle("Admin Controling Panel");  
+		frame.setBounds(100, 100, 700, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JButton btnAdministrator = new JButton("Room/Customer Control");
+		JButton btnAdministrator = new JButton("Room/Customer Adminstrative");
+		btnAdministrator.setFont(new Font("Bodoni MT Black", Font.PLAIN, 20));
 		btnAdministrator.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new AdminRoomControl(adminConnect).frame.setVisible(true);
@@ -57,11 +61,12 @@ public class AdminControl {
 				frame.dispose();
 			}
 		});
-		btnAdministrator.setBounds(54, 72, 331, 29);
+		btnAdministrator.setBounds(78, 98, 507, 62);
 		frame.getContentPane().add(btnAdministrator);
 		
 		JButton btnReservationsControl = new JButton("Reservations Control");
-		btnReservationsControl.setBounds(54, 111, 331, 29);
+		btnReservationsControl.setFont(new Font("Bodoni MT Black", Font.PLAIN, 20));
+		btnReservationsControl.setBounds(78, 170, 507, 62);
 		btnReservationsControl.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new ReservationsControl(adminConnect).frame.setVisible(true);
@@ -72,7 +77,8 @@ public class AdminControl {
 		frame.getContentPane().add(btnReservationsControl);
 		
 		JButton btnMakeReservation = new JButton("Make Reservation");
-		btnMakeReservation.setBounds(54, 185, 331, 29);
+		btnMakeReservation.setFont(new Font("Bodoni MT Black", Font.PLAIN, 20));
+		btnMakeReservation.setBounds(78, 361, 507, 62);
 		btnMakeReservation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new RoomReservationPage(adminConnect).frame.setVisible(true);
@@ -83,7 +89,15 @@ public class AdminControl {
 		frame.getContentPane().add(btnMakeReservation);
 		
 		JLabel lblAdminContralPannel = new JLabel("Admin Control Pannel");
-		lblAdminContralPannel.setBounds(54, 10, 331, 28);
+		lblAdminContralPannel.setFont(new Font("Poor Richard", Font.PLAIN, 33));
+		lblAdminContralPannel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAdminContralPannel.setBounds(10, 34, 664, 28);
 		frame.getContentPane().add(lblAdminContralPannel);
+		
+		JLabel lblProceedAsA = new JLabel("Proceed as a Customer");
+		lblProceedAsA.setFont(new Font("Poor Richard", Font.PLAIN, 33));
+		lblProceedAsA.setHorizontalAlignment(SwingConstants.CENTER);
+		lblProceedAsA.setBounds(0, 303, 684, 28);
+		frame.getContentPane().add(lblProceedAsA);
 	}
 }
