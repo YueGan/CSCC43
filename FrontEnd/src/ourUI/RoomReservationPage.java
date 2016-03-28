@@ -1,6 +1,7 @@
 package ourUI;
 
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -99,10 +100,6 @@ public class RoomReservationPage {
 		lblDisplayOptionHere.setBounds(10, 118, 200, 50);
 		frame.getContentPane().add(lblDisplayOptionHere);
 		
-		JPanel panel = new JPanel();
-		panel.setBounds(48, 180, 600, 165);
-		frame.getContentPane().add(panel);
-		
 		
 		
 		JButton btnGenerate = new JButton("Search");
@@ -138,11 +135,13 @@ public class RoomReservationPage {
 							newbutton.setText("Room#: " + searchResult.getString("roomNumber") + 
 									" Type: " + searchResult.getString("roomType") + 
 									" Cap: " + searchResult.getString("capacity") + 
-									" Price " + searchResult.getString("Price") );
-							//newbutton.setVisible(true);
-							//spanel.add(newbutton);
+									" Price " + searchResult.getString("Price") );					
 							
+							group.add(newbutton);
+							frame.add(newbutton);
 						}
+						frame.setLayout(new FlowLayout());
+						
 						
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
