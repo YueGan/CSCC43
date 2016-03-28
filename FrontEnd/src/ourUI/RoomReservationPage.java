@@ -148,8 +148,8 @@ public class RoomReservationPage {
 							
 							group.add(newbutton);
 							optionFrame.add(newbutton);
+							optionFrame.pack();
 						}
-						frame.setLayout(new FlowLayout());
 						
 						
 					} catch (SQLException e1) {
