@@ -35,8 +35,8 @@ public class ReservationsControl {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ReservationsControl window = new ReservationsControl(new DBConnection("jdbc:mysql://sql5.freemysqlhosting.net:3306/sql5112390", "sql5112390", "GRa9gFy4NQ"));
-					window.frame.setVisible(true);
+					//ReservationsControl window = new ReservationsControl(new DBConnection("jdbc:mysql://sql5.freemysqlhosting.net:3306/sql5112390", "sql5112390", "GRa9gFy4NQ"));
+					//window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

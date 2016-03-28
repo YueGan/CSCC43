@@ -24,8 +24,8 @@ public class AdminControl {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AdminControl window = new AdminControl(new DBConnection("jdbc:mysql://sql5.freemysqlhosting.net:3306/sql5112390", "sql5112390", "GRa9gFy4NQ"));
-					window.frame.setVisible(true);
+					//AdminControl window = new AdminControl(new DBConnection("jdbc:mysql://sql5.freemysqlhosting.net:3306/sql5112390", "sql5112390", "GRa9gFy4NQ"));
+					//window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

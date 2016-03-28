@@ -43,8 +43,8 @@ public class AdminPage {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AdminPage window = new AdminPage();
-					window.frame.setVisible(true);
+					//AdminPage window = new AdminPage();
+					//window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

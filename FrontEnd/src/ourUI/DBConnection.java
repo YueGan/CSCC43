@@ -44,9 +44,10 @@ public class DBConnection {
 			//
 			Statement myStmt = conn.createStatement();
 			// get result table set
-			ResultSet myRs = myStmt.executeQuery("SELECT roomNumber FROM room WHERE capacity >= '" + capacity +
-					"' AND roomNumber NOT IN (SELECT roomNumber FROM reservation WHERE not((Indate <= "+
-					checkIn +") AND ("+ checkIn + " < " + checkOut +") AND ( " + checkOut +" <= Outdate))");
+
+			ResultSet myRs = myStmt.executeQuery("SELECT * FROM room WHERE capacity >= " + capacity +
+					" AND roomNumber NOT IN (SELECT roomNumber FROM reservations WHERE NOT ((Indate <= "+
+					checkIn +") AND ("+ checkIn + " < " + checkOut +") AND ( " + checkOut +" <= Outdate)))");
 
 			return myRs;
 		} catch (SQLException e) {
@@ -149,33 +150,35 @@ public class DBConnection {
 	}
 
 
-	public void addReservation(Integer roomNumber, Integer guestNum, String InDate, String OutDate){
+	public int addReservation(Integer roomNumber, Integer guestNum, String InDate, String OutDate){
 		try {
 			
-			Integer newCustomerRef;
+			Integer newReservationRef;
 			Statement myStmt = conn.createStatement();
-			ArrayList<Integer> customerRefList = new ArrayList<Integer>();
-			ResultSet customerAddressSet = myStmt.executeQuery("SELECT customerRef FROM customers"
+			ArrayList<Integer> ReservationRefList = new ArrayList<Integer>();
+			ResultSet reservationAddressSet = myStmt.executeQuery("SELECT reservationRef FROM reservations"
 					+ "");
-			while(customerAddressSet.next()){
-				customerRefList.add(Integer.parseInt(customerAddressSet.getString("customerRef")));
+			while(reservationAddressSet.next()){
+				ReservationRefList.add(Integer.parseInt(reservationAddressSet.getString("reservationRef")));
 			}
-			newCustomerRef = Collections.max(customerRefList) + 1;
+			newReservationRef = Collections.max(ReservationRefList) + 1;
 			// create new Statement
 
 			// the entity with need to be added
-			String entity = roomNumber + ",'" + newCustomerRef + "'," + guestNum + "," + InDate + "," + OutDate;
+			String entity = roomNumber + ",'" + newReservationRef + "'," + guestNum + "," + InDate + "," + OutDate;
 			// the query for inserting
 			String query = "INSERT INTO room"
 					+ "(roomNumber, customerRef, guestNum, InDate, OutDate)"
 					+ "VALUES(" + entity + ")"; 
 			myStmt.executeUpdate(query);
-			System.out.println("New Resevation Insert Completed");
+			return newReservationRef;
+			//System.out.println("New Resevation Insert Completed");
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return -1;
 	}
 	
 	
@@ -232,7 +235,7 @@ public class DBConnection {
 	
 	public static void main(String[] args) {
 //		  try { 
-//			   Class.forName("com.mysql.jdbc.Driver");   //翹�YSQL JDBC�蝓黑純傢�  
+//			   Class.forName("com.mysql.jdbc.Driver");   
 //			   //Class.forName("org.gjt.mm.mysql.Driver"); 
 //			   System.out.println("Success loading Mysql Driver!"); 
 //			  } 
@@ -241,6 +244,7 @@ public class DBConnection {
 //			   e.printStackTrace(); 
 //			  }
 		DBConnection myDB = new DBConnection("jdbc:mysql://sql5.freemysqlhosting.net:3306/sql5112390", "sql5112390", "GRa9gFy4NQ");
+
 		//		ResultSet test = myDB.getRoom("1");
 //		try{
 //			while(test.next()){

@@ -29,8 +29,8 @@ public class AdminRoomEdit {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AdminRoomEdit window = new AdminRoomEdit();
-					window.frame.setVisible(true);
+					//AdminRoomEdit window = new AdminRoomEdit();
+					//window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

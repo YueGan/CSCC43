@@ -31,8 +31,8 @@ public class CustomerReservation {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CustomerReservation window = new CustomerReservation(new DBConnection("jdbc:mysql://sql5.freemysqlhosting.net:3306/sql5112390", "sql5112390", "GRa9gFy4NQ"), "", "" ,"");
-					window.frame.setVisible(true);
+					//CustomerReservation window = new CustomerReservation(new DBConnection("jdbc:mysql://sql5.freemysqlhosting.net:3306/sql5112390", "sql5112390", "GRa9gFy4NQ"), "", "" ,"");
+					//window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -120,10 +120,10 @@ public class CustomerReservation {
 					int customerRef = adminConnect.addCustomer(txtFirstName.getText(), txtLastName.getText(),
 							txtCustomerID.getText(),
 							txtEmail.getText(), txtCountry.getText());
-					reservationNum = adminConnect.addReservation(Integer.parseInt(selectedRoom), customerRef, inDate, outDate);
+					int reservationNum = adminConnect.addReservation(Integer.parseInt(selectedRoom), customerRef, inDate, outDate);
 					//~~~~~~ Help to return rervation Number here 
-					//String message = "Your reservation "+ reservationNum    + "is completed ! ";
-					//JOptionPane.showMessageDialog(null,"Please enter all required field!");
+					String message = "Your reservation "+ reservationNum    + "is completed ! ";
+					JOptionPane.showMessageDialog(null, message);
 					//addReservation(selectedRoom, );
 					new RoomReservationPage(adminConnect).frame.setVisible(true);
 					// Change later to visible

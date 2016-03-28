@@ -1,6 +1,7 @@
 package ourUI;
 
 import java.awt.EventQueue;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
@@ -19,6 +20,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 
 import java.awt.Panel;
+import javax.swing.JPanel;
 
 public class RoomReservationPage {
 
@@ -69,11 +71,11 @@ public class RoomReservationPage {
 		lblCapacity.setBounds(101, 10, 68, 25);
 		frame.getContentPane().add(lblCapacity);
 		
-		JLabel label = new JLabel("Check in(dd-MM-yyyy)");
+		JLabel label = new JLabel("Check in(yyyyMMdd)");
 		label.setBounds(246, 10, 134, 25);
 		frame.getContentPane().add(label);
 		
-		JLabel label_1 = new JLabel("Check out(dd-MM-yyyy)");
+		JLabel label_1 = new JLabel("Check out(yyyyMMdd)");
 		label_1.setBounds(443, 10, 173, 25);
 		frame.getContentPane().add(label_1);
 		
@@ -92,13 +94,16 @@ public class RoomReservationPage {
 		frame.getContentPane().add(txtCheckOut);
 		txtCheckOut.setColumns(10);
 		
+		
 		JLabel lblDisplayOptionHere = new JLabel("Option(s) : ");
 		lblDisplayOptionHere.setBounds(10, 118, 200, 50);
 		frame.getContentPane().add(lblDisplayOptionHere);
 		
-		Panel optionPanel = new Panel();
-		optionPanel.setBounds(10, 157, 664, 259);
-		frame.getContentPane().add(optionPanel);
+		JPanel panel = new JPanel();
+		panel.setBounds(48, 180, 600, 165);
+		frame.getContentPane().add(panel);
+		
+		
 		
 		JButton btnGenerate = new JButton("Search");
 		btnGenerate.setBounds(544, 105, 117, 29);
@@ -107,7 +112,7 @@ public class RoomReservationPage {
 
 				inDate = txtCheckIn.getText();
 				outDate = txtCheckOut.getText();
-				SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+				SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 				Date checkInDate = null;
 				Date checkOutDate = null;
 				try {
@@ -124,16 +129,21 @@ public class RoomReservationPage {
 				}
 				else{
 					searchResult = userConnect.getSearch(txtCapacity.getText(), inDate, outDate);
+					
 					group = new ButtonGroup(); 
 					try {
 						while(searchResult.next()){
 							JRadioButton newbutton = new JRadioButton();
+							
 							newbutton.setText("Room#: " + searchResult.getString("roomNumber") + 
 									" Type: " + searchResult.getString("roomType") + 
 									" Cap: " + searchResult.getString("capacity") + 
 									" Price " + searchResult.getString("Price") );
-							group.add(newbutton);
+							//newbutton.setVisible(true);
+							//spanel.add(newbutton);
+							
 						}
+						
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -160,6 +170,11 @@ public class RoomReservationPage {
 			}
 		});
 		frame.getContentPane().add(btnNext);
+		
+		
+		
+		
+		
 		
 
 	}

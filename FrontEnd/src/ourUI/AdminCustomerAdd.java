@@ -30,8 +30,8 @@ public class AdminCustomerAdd {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AdminCustomerAdd window = new AdminCustomerAdd();
-					window.frame.setVisible(true);
+					//AdminCustomerAdd window = new AdminCustomerAdd();
+					//window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

@@ -31,8 +31,8 @@ public class AdminCustomerEdit {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AdminCustomerEdit window = new AdminCustomerEdit();
-					window.frame.setVisible(true);
+					//AdminCustomerEdit window = new AdminCustomerEdit();
+					//window.frame.setVisible(true);
 					
 				} catch (Exception e) {
 					e.printStackTrace();

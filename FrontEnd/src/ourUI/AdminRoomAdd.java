@@ -28,8 +28,8 @@ public class AdminRoomAdd {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AdminRoomAdd window = new AdminRoomAdd();
-					window.frame.setVisible(true);
+					//AdminRoomAdd window = new AdminRoomAdd();
+					//window.frame.setVisible(true);
 
 				} catch (Exception e) {
 					e.printStackTrace();

@@ -20,8 +20,8 @@ public class AdminRoomControl {
 			public void run() {
 				try {
 
-					AdminRoomControl window = new AdminRoomControl();
-					window.frame.setVisible(true);
+					//AdminRoomControl window = new AdminRoomControl();
+					//window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
