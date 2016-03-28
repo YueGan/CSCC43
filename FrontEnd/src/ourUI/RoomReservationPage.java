@@ -26,6 +26,7 @@ import javax.swing.JPanel;
 public class RoomReservationPage {
 
 	JFrame frame;
+	JFrame optionFrame;
 	private JTextField txtCapacity;
 	private JTextField txtCheckIn;
 	private JTextField txtCheckOut;
@@ -63,10 +64,18 @@ public class RoomReservationPage {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		
 		frame.setTitle("Search");  
 		frame.setBounds(100, 100, 700, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		
+		
+		optionFrame = new JFrame();
+		optionFrame.setTitle("options");  
+		optionFrame.setBounds(100, 300, 600, 250);
+		optionFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		optionFrame.getContentPane().setLayout(new FlowLayout());
 		
 		JLabel lblCapacity = new JLabel("Room Size");
 		lblCapacity.setBounds(101, 10, 68, 25);
@@ -138,7 +147,7 @@ public class RoomReservationPage {
 									" Price " + searchResult.getString("Price") );					
 							
 							group.add(newbutton);
-							frame.add(newbutton);
+							optionFrame.add(newbutton);
 						}
 						frame.setLayout(new FlowLayout());
 						
