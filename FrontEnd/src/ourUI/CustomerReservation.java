@@ -134,6 +134,7 @@ public class CustomerReservation {
 							txtCustomerID.getText(),
 							txtEmail.getText(), txtCountry.getText());
 					int reservationNum = adminConnect.addReservation(Integer.parseInt(selectedRoom), customerRef, capacity, inDate, outDate);
+					adminConnect.addInvoice(reservationNum, (float)price*totalDay, "", "", "");
 					//~~~~~~ Help to return rervation Number here 
 					String message = "Your reservation "+ reservationNum    + "is completed ! ";
 					JOptionPane.showMessageDialog(null, message);

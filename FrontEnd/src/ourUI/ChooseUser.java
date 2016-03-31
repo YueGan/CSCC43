@@ -92,7 +92,7 @@ public class ChooseUser {
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Danny Chen\\Desktop\\cscc43Project\\CSCC43\\FrontEnd\\src\\icon.jpg"));
+		lblNewLabel.setIcon(new ImageIcon("/Users/Gavin/Desktop/CSCC43/FrontEnd/src/icon.jpg"));
 		lblNewLabel.setBounds(39, 77, 596, 273);
 		frame.getContentPane().add(lblNewLabel);
 		

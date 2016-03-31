@@ -191,15 +191,24 @@ public class DBConnection {
 	}
 	
 	
-	public void addInvoice(Integer invoiceNumber, String customerRef, double amount, String ispaid, String payingMethod, String comments){
+	public void addInvoice(int reservationRef, float amount, String ispaid, String payingMethod, String comments){
 		try {
+			Integer newInvoiceRef;
 			// create new Statement
 			Statement myStmt = conn.createStatement();
+			ArrayList<Integer> ReservationRefList = new ArrayList<Integer>();
+			ResultSet reservationAddressSet = myStmt.executeQuery("SELECT invoiceNumber FROM invoice"
+					+ "");
+			while(reservationAddressSet.next()){
+				ReservationRefList.add(Integer.parseInt(reservationAddressSet.getString("invoiceNumber")));
+			}
+			newInvoiceRef = Collections.max(ReservationRefList) + 1;
+			
 			// the entity with need to be added
-			String entity = invoiceNumber + ",'" + customerRef + "'," + amount + ",'" + ispaid + "','" + payingMethod +"','"+ comments+"'";
+			String entity = newInvoiceRef + ",'" + reservationRef + "'," + amount + ",'" + ispaid + "','" + payingMethod +"','"+ comments+"'";
 			// the query for inserting
 			String query = "INSERT INTO invoice"
-					+ "(invoiceNumber, customerRef, amount, ispaid, payingMethod, comments)"
+					+ "(invoiceNumber, reservationRef, amount, ispaid, payingMethod, comments)"
 					+ "VALUES(" + entity + ")"; 
 			myStmt.executeUpdate(query);
 			System.out.println("New invoice Insert Completed");
