@@ -1,6 +1,7 @@
 package ourUI;
 
 import java.sql.*;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -51,7 +52,7 @@ public class DBConnection {
 			
 			ResultSet myRs = myStmt.executeQuery("SELECT * FROM room WHERE capacity >= " + capacity +
 					" AND roomNumber NOT IN (SELECT roomNumber FROM reservations WHERE" +
-						"(InDate <= " + checkIn + " AND OutDate >= " + checkIn + ") OR " + 
+						"(InDate <= " + checkIn + " AND OutDate > " + checkIn + ") OR " + 
 						"(InDate <= " + checkOut + " AND OutDate >= " + checkOut + ") OR" +
 						"(InDate >= " + checkIn + " AND OutDate <= " + checkOut + "))");
 
@@ -272,6 +273,18 @@ public class DBConnection {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		long startTime = checkIn.getTime();
+		long endTime = checkOut.getTime();
+		long diffTime = endTime - startTime;
+		long diffDays = diffTime / (1000 * 60 * 60 * 24);
+		
+		DateFormat dateFormat = DateFormat.getDateInstance();
+		System.out.println("The difference between "+
+		  dateFormat.format(checkIn)+" and "+
+		  dateFormat.format(checkOut)+" is "+
+		  diffDays+" days.");
+		
 		System.out.println(ft.format(checkIn));
 		System.out.println(ft.format(checkOut));
 		ind = ft.format(checkIn);

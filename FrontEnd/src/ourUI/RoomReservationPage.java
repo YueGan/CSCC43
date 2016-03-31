@@ -40,6 +40,8 @@ public class RoomReservationPage {
 	private String outDate;
 	private String in;
 	private String out;
+	private long totalDate;
+	private int price;
 	/**
 	 * Launch the application.
 	 */
@@ -141,7 +143,12 @@ public class RoomReservationPage {
 					SimpleDateFormat ft = new SimpleDateFormat("yyyyMMdd");
 					in = ft.format(checkInDate);
 					out = ft.format(checkOutDate);
+					long startTime = checkInDate.getTime();
+					long endTime = checkOutDate.getTime();
+					long diffTime = endTime - startTime;
+					totalDate = diffTime / (1000 * 60 * 60 * 24);
 					
+
 					searchResult = userConnect.getSearch(txtCapacity.getText(), inDate, outDate);
 
 				     
@@ -186,18 +193,31 @@ public class RoomReservationPage {
 					int cusCapacity = 0;
 					for(int i = 0; i < listButtons.size(); i++){
 						if(listButtons.get(i).isSelected()){
-							System.out.println(listButtons.get(i).getActionCommand().split(" ")[1]);
 							roomNumber = listButtons.get(i).getActionCommand().split(" ")[1];
 							cusCapacity = Integer.parseInt(listButtons.get(i).getActionCommand().split(" ")[5]);
+							price = Integer.parseInt(listButtons.get(i).getActionCommand().split(" ")[7]);
 						}
 					}
-					new CustomerReservation(userConnect, roomNumber, cusCapacity, in, out).frame.setVisible(true);
+
+					new CustomerReservation(userConnect, roomNumber, cusCapacity, in, out, totalDate, price).frame.setVisible(true);
 					// Change later to visible
 					frame.dispose();
 				}
 			}
 		});
 		frame.getContentPane().add(btnNext);
+		
+		JButton btnBack = new JButton("Login");
+		btnBack.setBounds(416, 422, 117, 29);
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				new ChooseUser().frame.setVisible(true);
+				// Change later to visible
+				frame.dispose();
+			}
+		});
+		frame.getContentPane().add(btnBack);
 		
 
 		

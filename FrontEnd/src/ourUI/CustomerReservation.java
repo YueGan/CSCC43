@@ -25,6 +25,9 @@ public class CustomerReservation {
 	private String inDate;
 	private String outDate;
 	private int capacity;
+	private int totalDay;
+	private JLabel lblNewLabel;
+	private int price;
 	/**
 	 * Launch the application.
 	 */
@@ -32,7 +35,7 @@ public class CustomerReservation {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					//CustomerReservation window = new CustomerReservation(new DBConnection("jdbc:mysql://sql5.freemysqlhosting.net:3306/sql5112390", "sql5112390", "GRa9gFy4NQ"), "", "" ,"");
+					//CustomerReservation window = new CustomerReservation(new DBConnection("jdbc:mysql://sql5.freemysqlhosting.net:3306/sql5112390", "sql5112390", "GRa9gFy4NQ"), "", 1, "" ,"", 1, 1);
 					//window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -44,12 +47,15 @@ public class CustomerReservation {
 	/**
 	 * Create the application.
 	 */
-	public CustomerReservation(DBConnection adminConnect, String selectedRoom, int capacity, String inDate, String outDate) {
+	public CustomerReservation(DBConnection adminConnect, String selectedRoom, int capacity,
+			String inDate, String outDate, long totalDate, int price) {
 		this.inDate = inDate;
 		this.outDate = outDate;
 		this.selectedRoom = selectedRoom;
 		this.adminConnect = adminConnect;
 		this.capacity = capacity;
+		this.totalDay = (int)totalDate;
+		this.price = price;
 		initialize();
 	}
 
@@ -108,6 +114,11 @@ public class CustomerReservation {
 		txtCountry.setBounds(137, 204, 200, 29);
 		frame.getContentPane().add(txtCountry);
 		
+		String priceString = "The price for " + totalDay + " days residency is $" + totalDay * price;
+		lblNewLabel = new JLabel(priceString);
+		lblNewLabel.setBounds(63, 10, 475, 50);
+		frame.getContentPane().add(lblNewLabel);
+		
 		JButton btnMakeReservation = new JButton("Make Reservation");
 		btnMakeReservation.setBounds(539, 382, 117, 29);
 		btnMakeReservation.addActionListener(new ActionListener() {
@@ -134,6 +145,8 @@ public class CustomerReservation {
 			}
 		});
 		frame.getContentPane().add(btnMakeReservation);
+		
+
 		
 
 	}

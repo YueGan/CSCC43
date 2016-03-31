@@ -15,7 +15,7 @@ import java.awt.Font;
 
 public class ChooseUser {
 
-	private JFrame frame;
+	JFrame frame;
 
 	/**
 	 * Launch the application.
