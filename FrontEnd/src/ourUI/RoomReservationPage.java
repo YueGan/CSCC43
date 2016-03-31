@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.ButtonGroup;
@@ -19,8 +20,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.SwingUtilities;
 
 import java.awt.Panel;
+
 import javax.swing.JPanel;
 
 public class RoomReservationPage {
@@ -35,7 +38,8 @@ public class RoomReservationPage {
 	private ButtonGroup group;
 	private String inDate;
 	private String outDate;
-	
+	private String in;
+	private String out;
 	/**
 	 * Launch the application.
 	 */
@@ -71,11 +75,6 @@ public class RoomReservationPage {
 		frame.getContentPane().setLayout(null);
 		
 		
-		optionFrame = new JFrame();
-		optionFrame.setTitle("options");  
-		optionFrame.setBounds(100, 300, 600, 250);
-		optionFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		optionFrame.getContentPane().setLayout(new FlowLayout());
 		
 		JLabel lblCapacity = new JLabel("Room Size");
 		lblCapacity.setBounds(101, 10, 68, 25);
@@ -109,13 +108,17 @@ public class RoomReservationPage {
 		lblDisplayOptionHere.setBounds(10, 118, 200, 50);
 		frame.getContentPane().add(lblDisplayOptionHere);
 		
+		JPanel panel = new JPanel();
+		panel.setBounds(64, 207, 452, 171);
+		frame.getContentPane().add(panel);
 		
+		ArrayList<JRadioButton> listButtons = new ArrayList<JRadioButton>();
 		
 		JButton btnGenerate = new JButton("Search");
 		btnGenerate.setBounds(544, 105, 117, 29);
 		btnGenerate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				panel.removeAll();
 				inDate = txtCheckIn.getText();
 				outDate = txtCheckOut.getText();
 				SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
@@ -134,24 +137,32 @@ public class RoomReservationPage {
 					JOptionPane.showMessageDialog(null,"Invalid Dates");
 				}
 				else{
-					searchResult = userConnect.getSearch(txtCapacity.getText(), inDate, outDate);
 					
+					SimpleDateFormat ft = new SimpleDateFormat("yyyyMMdd");
+					in = ft.format(checkInDate);
+					out = ft.format(checkOutDate);
+					
+					searchResult = userConnect.getSearch(txtCapacity.getText(), inDate, outDate);
+
+				     
 					group = new ButtonGroup(); 
 					try {
+						
 						while(searchResult.next()){
-							JRadioButton newbutton = new JRadioButton();
+     
+							JRadioButton newbutton = new JRadioButton(searchResult.getString("roomNumber"));
 							
+							//System.out.println(searchResult.getString("roomNumber"));
 							newbutton.setText("Room#: " + searchResult.getString("roomNumber") + 
 									" Type: " + searchResult.getString("roomType") + 
 									" Cap: " + searchResult.getString("capacity") + 
 									" Price " + searchResult.getString("Price") );					
 							
+							listButtons.add(newbutton);
 							group.add(newbutton);
-							optionFrame.add(newbutton);
-							optionFrame.pack();
+							panel.add(newbutton);
 						}
-						
-						
+						SwingUtilities.updateComponentTreeUI(frame);
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -161,6 +172,8 @@ public class RoomReservationPage {
 		});
 		frame.getContentPane().add(btnGenerate);
 		
+
+		
 		JButton btnNext = new JButton("Next");
 		btnNext.setBounds(557, 422, 117, 29);
 		btnNext.addActionListener(new ActionListener() {
@@ -169,15 +182,28 @@ public class RoomReservationPage {
 					JOptionPane.showMessageDialog(null,"Please search for a room first!");
 				}
 				else{
-					ButtonModel selectedRoom = group.getSelection();
-					String roomNumber = selectedRoom.getActionCommand().split(" ")[1];
-					new CustomerReservation(userConnect, roomNumber, inDate, outDate).frame.setVisible(true);
+					String roomNumber = "";
+					int cusCapacity = 0;
+					for(int i = 0; i < listButtons.size(); i++){
+						if(listButtons.get(i).isSelected()){
+							System.out.println(listButtons.get(i).getActionCommand().split(" ")[1]);
+							roomNumber = listButtons.get(i).getActionCommand().split(" ")[1];
+							cusCapacity = Integer.parseInt(listButtons.get(i).getActionCommand().split(" ")[5]);
+						}
+					}
+					new CustomerReservation(userConnect, roomNumber, cusCapacity, in, out).frame.setVisible(true);
 					// Change later to visible
 					frame.dispose();
 				}
 			}
 		});
 		frame.getContentPane().add(btnNext);
+		
+
+		
+
+		
+
 		
 		
 		

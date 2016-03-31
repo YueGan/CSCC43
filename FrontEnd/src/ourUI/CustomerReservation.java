@@ -24,6 +24,7 @@ public class CustomerReservation {
 	private JTextField txtCustomerID;
 	private String inDate;
 	private String outDate;
+	private int capacity;
 	/**
 	 * Launch the application.
 	 */
@@ -43,11 +44,12 @@ public class CustomerReservation {
 	/**
 	 * Create the application.
 	 */
-	public CustomerReservation(DBConnection adminConnect, String selectedRoom, String inDate, String outDate) {
+	public CustomerReservation(DBConnection adminConnect, String selectedRoom, int capacity, String inDate, String outDate) {
 		this.inDate = inDate;
 		this.outDate = outDate;
 		this.selectedRoom = selectedRoom;
 		this.adminConnect = adminConnect;
+		this.capacity = capacity;
 		initialize();
 	}
 
@@ -120,7 +122,7 @@ public class CustomerReservation {
 					int customerRef = adminConnect.addCustomer(txtFirstName.getText(), txtLastName.getText(),
 							txtCustomerID.getText(),
 							txtEmail.getText(), txtCountry.getText());
-					int reservationNum = adminConnect.addReservation(Integer.parseInt(selectedRoom), customerRef, inDate, outDate);
+					int reservationNum = adminConnect.addReservation(Integer.parseInt(selectedRoom), customerRef, capacity, inDate, outDate);
 					//~~~~~~ Help to return rervation Number here 
 					String message = "Your reservation "+ reservationNum    + "is completed ! ";
 					JOptionPane.showMessageDialog(null, message);

@@ -1,8 +1,11 @@
 package ourUI;
 
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Set;
 
 public class DBConnection {
@@ -44,11 +47,16 @@ public class DBConnection {
 			//
 			Statement myStmt = conn.createStatement();
 			// get result table set
-
+			System.out.println(checkIn);
+			
 			ResultSet myRs = myStmt.executeQuery("SELECT * FROM room WHERE capacity >= " + capacity +
-					" AND roomNumber NOT IN (SELECT roomNumber FROM reservations WHERE NOT ((Indate <= "+
-					checkIn +") AND ("+ checkIn + " < " + checkOut +") AND ( " + checkOut +" <= Outdate)))");
+					" AND roomNumber NOT IN (SELECT roomNumber FROM reservations WHERE" +
+						"(InDate <= " + checkIn + " AND OutDate >= " + checkIn + ") OR " + 
+						"(InDate <= " + checkOut + " AND OutDate >= " + checkOut + ") OR" +
+						"(InDate >= " + checkIn + " AND OutDate <= " + checkOut + "))");
 
+			
+			
 			return myRs;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -150,7 +158,7 @@ public class DBConnection {
 	}
 
 
-	public int addReservation(Integer roomNumber, Integer guestNum, String InDate, String OutDate){
+	public int addReservation(Integer roomNumber, Integer customerRef, int capacity, String InDate, String OutDate){
 		try {
 			
 			Integer newReservationRef;
@@ -165,10 +173,10 @@ public class DBConnection {
 			// create new Statement
 
 			// the entity with need to be added
-			String entity = roomNumber + ",'" + newReservationRef + "'," + guestNum + "," + InDate + "," + OutDate;
+			String entity = roomNumber + "," + newReservationRef + "," + customerRef + "," + capacity + "," + InDate + "," + OutDate + "," + 10;
 			// the query for inserting
-			String query = "INSERT INTO room"
-					+ "(roomNumber, customerRef, guestNum, InDate, OutDate)"
+			String query = "INSERT INTO reservations"
+					+ "(roomNumber, reservationRef, customerRef, guestNum, InDate, OutDate, totalDays)"
 					+ "VALUES(" + entity + ")"; 
 			myStmt.executeUpdate(query);
 			return newReservationRef;
@@ -245,6 +253,44 @@ public class DBConnection {
 //			  }
 		DBConnection myDB = new DBConnection("jdbc:mysql://sql5.freemysqlhosting.net:3306/sql5112390", "sql5112390", "GRa9gFy4NQ");
 
+		String in = "20000101";
+		String out = "20000104";
+		String ind = "";
+		String outd = "";
+		
+		
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+		Date checkIn = null;
+		Date checkOut = null;
+		
+		SimpleDateFormat ft = new SimpleDateFormat("yyyyMMdd");
+		
+		try {
+			checkIn = format.parse(in);
+			checkOut= format.parse(out);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(ft.format(checkIn));
+		System.out.println(ft.format(checkOut));
+		ind = ft.format(checkIn);
+		outd = ft.format(checkOut);
+
+		
+		ResultSet result = myDB.executeQuery("SELECT * FROM reservations WHERE" +
+						"(InDate <= " + ind + " AND OutDate >= " + ind + ") OR " + 
+						"(InDate <= " + outd + " AND OutDate >= " + outd + ") OR" +
+						"(InDate >= " + in + " AND OutDate <= " + outd + ")");
+		
+		try {
+			while(result.next()){
+				System.out.println(result.getString("roomNumber"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		//		ResultSet test = myDB.getRoom("1");
 //		try{
 //			while(test.next()){
